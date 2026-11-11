@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F2F5F6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B1620" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="description" content="Gastos compartidos, plan por día, rosco y trivia, y frasario en portugués para el viaje a Brasil.">
+<title>Viajecinho</title>
+<meta name="apple-mobile-web-app-title" content="Viajecinho">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48cmVjdCB3aWR0aD0nMTAwJyBoZWlnaHQ9JzEwMCcgcng9JzIyJyBmaWxsPScjMDA5QzNCJy8+PHBhdGggZD0nTTUwIDE1IEw5MiA1MCBMNTAgODUgTDggNTBaJyBmaWxsPScjRkZERjAwJy8+PGNpcmNsZSBjeD0nNTAnIGN5PSc1MCcgcj0nMTknIGZpbGw9JyMwMDI3NzYnLz48Y2lyY2xlIGN4PSc1MCcgY3k9JzQwJyByPScyLjgnIGZpbGw9JyNmZmYnLz48cmVjdCB4PSczNicgeT0nNDIuNScgd2lkdGg9JzI4JyBoZWlnaHQ9JzInIHJ4PScxJyBmaWxsPScjZmZmJy8+PHBhdGggZD0nTTQ2LjUgNDMgTDUzLjUgNDMgTDU2LjUgNjIgTDQzLjUgNjJaJyBmaWxsPScjZmZmJy8+PC9zdmc+">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAGGUlEQVR42u2dr24UURSHV+FQOFLfF6hoUkF4AVBNBRaBIzWEFyCoOiQJIXWVFeARDcEQFBJSg+QRlgNLNoXdTmfunHvv+fNtfqKlO7SULzPfuX/OXSxeHxCyPfwKCHAQ4CDAQYCDAAcBDgIcBDgIcBDgIAQ4CHAQ4CDAQYCDAAcBDgIcBDgIcBACHAQ4CHAQ4CDAQYDDWM4+3pHwewCOf7JzuidYLL8tJPKBfMrvBDj+knH59daKjFXkU/gAjoPD893/yFjzIV8CjtRkbGJxNdn5yKyfw2SsFQQ4kurnSD6SKgj6OSZJFRX9HM9HOgVBPyclFx/o59QkUlT0s4yPFAqCfhYrSHw+0M85fARXEPQTRc0Fh7pkJFVU9BNFTQFHPf1MqqjoJ4oaHI5m+plLUdFPFDUmHL30M4uiop8oajQ4LOhnfEVFP1HUOHCYlYyAiop+oqju4bCvnwEVFf1c5eLd3bO3uxL5AEV1A4e6fl5+ui0QHD5+IFnsPhvI6j3yZrkko6Lm0U+5JRw/v79z8GQYiOsiF8rlivcVB4qaQT9PTvaKmdhKifyFKRQ1tn7qYlEDEdOKGlU/62GhjohdRY2nnyKP+w8f1cbiauTbzTdWi3wE00+pLFpicTXyraMpaiT9vLE0rR35AUIpahj97E6GFh+GFDWAfsrzvoF7TrLUmQpiRVEDjH6aImPNR4RRVO+jnypPk+OX5xefvy//vOQD+dTC86W/oroe/VQh4+z9l+XGS/7QDh/dFMTv6KdK1So3ieU1L5X7x/z6tqeiOp18F+NTkYP102TzJV9S+RYqM7p9FNXp5LvWGOhy8KU1fup1ot/j5LtMZ2iVFQ3gkGjN4rZWVI9rPxVr1waPFa3KtoOiulv7qXjbaCCkNW4e7RTV3dpP9SGveqVsvZtHI0X1tfVo87axf/RK/iNnZiscMyM/WNWbRwtF9bX1aPO2cfj0dGnyJT9Y7ZtHdUV1tPVIFvduGYX0A8dv/62z76GWojraeiSLv73DIf8ET9ulHG090lXRgSK2UkFb78lSS1G97HzXGi8fOfxVYyhMcTS9kaJ62fmuvji0FxwqU3GNFNXLznfdVYCTTGWrPfSdx2+kqF52vgNHB0X10nipwajodS/10VI3Tae8NF4Cjg6K6qXxUi8breGkbppOuWi8tHVs1C8ctfvDqCmqi8ZLunWsTIlNhWNzFs14NaujqAnhKBhx1y1YAsIR5rFy8ubDVDjkEh4rKYR0UqlSo2CJKaQxStnLHz+nwiGXUMqmGAQrm4JnECz+8PnOvRdlcMiFDJ8Hn3grXhykVbBkmXjzOGU/sBdh+KW1UyHRlL27xT4FpYpuwZJusY+jZYIjVwdWWi+YdJlgrwXGbUoVrYIl7wLjLlsTfMGRemtC+01NbUoVlYKFTU2tt0M6goPtkKY3UheXKvMLFjZSW2/B0BEOWjBYb94yf5MjzVvCtn3qBQdtn6w3jCtYHaiyXpCGcQ5aTarsxy8oWGg16aBJbcHqwPnrBWlS66O9tUyrzm/mNGlulvbWERrj2zx4JWljfI7U4EgNDuPhMB6O8eIYLw4A5ABAjg7l6FAOHebQYY4r57jyUHAojqLWQ0QFC1v66QUO3Yl+XUS0sDCnn47gUJ/ol8W9svi7mBK5UC5XXCFsTj/dwVFjLarIo1QWUnbeWPqu3iNvVt+JZFQy3MHRZke/3BIEAkntzip29dMpHH2bTvlb+5kNjo5Np/yt/UwIR8emUyn0MwAcXZpOpdDPGHC0bzqVQj/DwOFCUZ3pZyQ4jCuqP/0MBodZRXWpnyHhsKaojiUjJBxGFNW3fgaGo7uiutfP2HB0VNQI+hkeji6KGkQ/k8DRUlFDSUYSOBooajT9TAVHVUUNqJ/Z4KikqDH1MyEc6ooaVj/TwqGlqMElIy0cMxU1vn4mh6NYUVPoJ3AUKGoW/QSOqYqaSD+BY5KippMM4BijqBn1EzjGKGpS/QSOGxU1r34Cx7CiptZP4CDAQYCDAAcBDgIcBDgIcBDgIMBBCHAQ4CDAQYCDAAcBDgIcBDgIcBDgIAQ4CHAQ4CDAQYCDAAcBDuItvwBr6WRrH03N0QAAAABJRU5ErkJggg==">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* reset propio */
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+/* Layout: columna única tipo app, cabecera con la onda del calçadão, navegación fija abajo. */
+:root{
+  --bg:#F2F5F6; --surface:#FFFFFF; --surface2:#E8EEF0; --ink:#0E1F2B; --muted:#56697A; --line:#D5DEE3;
+  --accent:#14508C; --accent-ink:#FFFFFF; --sun:#F2B800; --sun-ink:#2A2000;
+  --good:#1B7F4B; --bad:#B83A2E; --shadow:0 1px 2px rgba(14,31,43,.08),0 6px 18px rgba(14,31,43,.06);
+  --f-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --f-body:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0B1620; --surface:#132230; --surface2:#1A2D3D; --ink:#E8EEF2; --muted:#93A5B3; --line:#25384A;
+  --accent:#6AAEF2; --accent-ink:#08213A; --sun:#F5C842; --sun-ink:#2A2000; --good:#4CC38A; --bad:#F28B7D;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1620; --surface:#132230; --surface2:#1A2D3D; --ink:#E8EEF2; --muted:#93A5B3; --line:#25384A;
+  --accent:#6AAEF2; --accent-ink:#08213A; --sun:#F5C842; --sun-ink:#2A2000; --good:#4CC38A; --bad:#F28B7D;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3); color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 15px/1.45 var(--f-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 96px;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+.wrap{max-width:720px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.eyebrow{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+/* cabecera */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);padding-top:12px}
+.top-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{min-width:0;display:flex;align-items:center;gap:10px}
+.brand .nm{min-width:0}
+.logo{width:42px;height:42px;flex:none;display:block}
+.brand h1{font-size:27px;font-weight:800;line-height:1}
+.brand .trip{font-size:13px;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-actions{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none}
+.sync{font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.sync i{width:8px;height:8px;border-radius:50%;background:var(--muted);display:inline-block}
+.sync.live i{background:var(--good)}
+.wave{display:block;width:100%;height:14px;margin-top:10px}
+.wave path{fill:none;stroke:var(--ink);stroke-width:3;opacity:.85}
+
+/* controles */
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 14px;font-weight:600;min-height:40px}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+.btn.sun{background:var(--sun);color:var(--sun-ink);border-color:transparent}
+.btn.ghost{background:transparent}
+.btn.danger{color:var(--bad)}
+.btn.sm{padding:6px 10px;min-height:32px;font-size:13px;border-radius:8px}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.row.between{justify-content:space-between}
+.grow{flex:1;min-width:0}
+.seg{display:flex;background:var(--surface2);border-radius:10px;padding:3px;gap:3px}
+.seg button{flex:1;border:0;background:transparent;border-radius:8px;padding:7px 8px;font-weight:600;color:var(--muted);min-height:34px}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:500}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+label.f{display:block;font-size:13px;font-weight:600;margin:12px 0 4px}
+input[type=text],input[type=number],input[type=date],input[type=time],select,textarea{
+  width:100%;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-height:42px}
+textarea{min-height:90px;resize:vertical}
+
+/* tarjetas */
+main{padding-top:16px;display:flex;flex-direction:column;gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
+.card h2{font-size:19px;margin-bottom:10px}
+.banner{background:var(--sun);color:var(--sun-ink);border-radius:12px;padding:12px 14px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.banner b{font-family:var(--f-display)}
+.banner .btn{background:var(--sun-ink);color:var(--sun);border:0}
+.empty{text-align:center;padding:18px 8px;color:var(--muted)}
+
+/* gastos */
+.total{font-family:var(--f-display);font-weight:800;font-size:34px;line-height:1.05}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:12px}
+.stat .v{font-weight:700;font-size:17px}
+.bal{display:grid;grid-template-columns:minmax(64px,90px) 1fr auto;gap:10px;align-items:center;padding:6px 0}
+.bal .name{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.track{position:relative;height:10px;background:var(--surface2);border-radius:6px}
+.track::after{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:2px;background:var(--line)}
+.fill{position:absolute;top:0;bottom:0;border-radius:6px}
+.fill.pos{left:50%;background:var(--good)}
+.fill.neg{right:50%;background:var(--bad)}
+.pos-t{color:var(--good)} .neg-t{color:var(--bad)}
+.pay{display:flex;align-items:center;gap:8px;padding:9px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.pay:first-of-type{border-top:0}
+.pay .arrow{color:var(--muted)}
+.day-h{font-family:var(--f-display);font-weight:700;font-size:14px;color:var(--muted);margin:14px 0 4px;text-transform:capitalize}
+.exp{display:grid;grid-template-columns:1fr auto;gap:2px 12px;width:100%;text-align:left;background:transparent;border:0;border-top:1px solid var(--line);padding:11px 0}
+.exp:first-of-type{border-top:0}
+.exp .d{font-weight:600}
+.exp .amt{text-align:right;font-weight:700}
+.tag{display:inline-block;font-size:11px;font-weight:600;border-radius:6px;padding:1px 7px;background:var(--surface2);color:var(--muted);margin-right:6px}
+
+/* plan */
+.count{display:flex;align-items:baseline;gap:10px}
+.count b{font-family:var(--f-display);font-size:40px;font-weight:800;line-height:1}
+.day{border-left:3px solid var(--line);padding-left:14px;margin-left:4px}
+.day.today{border-left-color:var(--sun)}
+.day h3{font-size:16px;text-transform:capitalize;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.item{display:grid;grid-template-columns:52px 1fr;gap:10px;width:100%;text-align:left;background:transparent;border:0;padding:8px 0}
+.item .t{font-weight:600;color:var(--muted);font-size:13px;padding-top:2px}
+.item .ti{font-weight:600}
+.item a{color:var(--accent);font-size:13px}
+
+/* juego */
+.rosco{display:block;width:100%;max-width:360px;margin:0 auto}
+.rl{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.rl.c{fill:var(--good);stroke:var(--good)} .rl.w{fill:var(--bad);stroke:var(--bad)}
+.rl.s{fill:var(--surface);stroke:var(--sun);stroke-width:3} .rl.cur{stroke:var(--accent);stroke-width:4}
+.rt{font:700 14px var(--f-display);fill:var(--ink);text-anchor:middle;dominant-baseline:central}
+.rl.c+.rt,.rl.w+.rt{fill:#fff}
+.clue{font-size:17px;font-weight:500;margin:6px 0 10px}
+.opt{display:block;width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:12px 14px;margin-top:8px;font-weight:500}
+.opt.ok{background:var(--good);color:#fff;border-color:var(--good)}
+.opt.no{background:var(--bad);color:#fff;border-color:var(--bad)}
+.rank{display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid var(--line)}
+.rank:first-of-type{border-top:0}
+
+/* frases */
+.ph{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:12px 0;border-top:1px solid var(--line)}
+.ph:first-of-type{border-top:0}
+.ph .pt{font-family:var(--f-display);font-weight:700;font-size:19px}
+.ph .es{color:var(--muted);font-size:13px}
+.ph .pr{font-size:13px;color:var(--accent);font-weight:500}
+.sos{display:flex;gap:10px;flex-wrap:wrap}
+.sos div{flex:1;min-width:92px;background:var(--surface2);border-radius:10px;padding:10px;text-align:center}
+.sos b{display:block;font-family:var(--f-display);font-size:24px}
+
+/* navegación */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:25;background:var(--surface);border-top:1px solid var(--line);
+  padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+nav.tabs .in{max-width:720px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+nav.tabs button{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border-radius:10px;color:var(--muted);font-size:12px;font-weight:600}
+nav.tabs svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav.tabs button[aria-current="page"]{color:var(--accent);background:var(--surface2)}
+.fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:24;
+  border-radius:999px;padding:12px 18px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+
+/* dialog y aviso */
+dialog{border:0;border-radius:16px;padding:0;background:var(--surface);color:var(--ink);width:min(560px,calc(100vw - 24px));max-height:88vh;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(6,14,20,.55)}
+.dlg{padding:18px 18px 16px}
+.dlg h2{font-size:21px;margin-bottom:4px}
+.dlg .acts{display:flex;gap:10px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.checks label{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;background:var(--surface)}
+.checks input{width:auto;min-height:0}
+.mrow{display:flex;gap:8px;margin-top:8px}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);
+  padding:10px 16px;border-radius:999px;font-weight:600;font-size:14px;z-index:60;max-width:calc(100vw - 32px);text-align:center}
+@media (prefers-reduced-motion:no-preference){.card,.banner{animation:in .25s ease-out}@keyframes in{from{opacity:.4;transform:translateY(4px)}}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div class="top-row">
+    <div class="brand"><svg class='logo' viewBox='0 0 100 100' aria-hidden='true'><rect width='100' height='100' rx='22' fill='#009C3B'/><path d='M50 15 L92 50 L50 85 L8 50Z' fill='#FFDF00'/><circle cx='50' cy='50' r='19' fill='#002776'/><circle cx='50' cy='40' r='2.8' fill='#fff'/><rect x='36' y='42.5' width='28' height='2' rx='1' fill='#fff'/><path d='M46.5 43 L53.5 43 L56.5 62 L43.5 62Z' fill='#fff'/></svg><div class="nm"><h1>Viajecinho</h1><div class="trip" id="tripLine"></div></div></div>
+    <div class="top-actions"><button class="btn sm" id="btnSet" type="button">Ajustes</button><span class="sync" id="sync"><i></i><span>Solo este celular</span></span></div>
+  </div>
+  <svg class="wave" viewBox="0 0 400 14" preserveAspectRatio="none" aria-hidden="true"><defs><pattern id="wv" width="40" height="14" patternUnits="userSpaceOnUse"><path d="M0 7 Q10 0 20 7 T40 7"/></pattern></defs><rect width="400" height="14" fill="url(#wv)" style="stroke:none"/></svg>
+</header>
+<main id="panel" aria-live="polite"></main>
+</div>
+<button class="btn primary fab" id="fab" type="button" hidden></button>
+<nav class="tabs" aria-label="Secciones"><div class="in" id="tabs"></div></nav>
+<dialog id="dlg"></dialog>
+<div id="toast" role="status" hidden></div>
+<script>
+/* ---------- sincronización con Firebase (opcional) ----------
+   Para que todos vean lo mismo, reemplazá null por la configuración web de tu proyecto de Firebase.
+   Ejemplo: const FIREBASE_CONFIG = { apiKey: "...", authDomain: "...", projectId: "...", storageBucket: "...", messagingSenderId: "...", appId: "..." };
+   Los pasos están en el README. */
+const FIREBASE_CONFIG = null;
+
+/* ---------- datos fijos ---------- */
+const CATS = ["Comida", "Transporte", "Alojamiento", "Salidas", "Compras", "Otros"];
+const TYPES = ["Actividad", "Comida", "Traslado", "Vuelo", "Alojamiento"];
+const CURS = ["BRL", "ARS", "USD"];
+const SYM = { BRL: "R$", ARS: "$", USD: "US$" };
+
+const ROSCO = [
+  { l: "A", k: "Empieza con A", q: "Fruta morada de la Amazonia, base de los bowls que se comen helados en todo Brasil.", a: ["acai", "asai"], d: "Açaí" },
+  { l: "B", k: "Empieza con B", q: "Estado del nordeste cuya capital es Salvador.", a: ["bahia"], d: "Bahía" },
+  { l: "C", k: "Empieza con C", q: "Trago nacional de Brasil hecho con cachaça, lima y azúcar.", a: ["caipirinha"], d: "Caipirinha" },
+  { l: "D", k: "Empieza con D", q: "En portugués, el número diez.", a: ["dez"], d: "Dez" },
+  { l: "E", k: "Empieza con E", q: "Pastelito abierto de origen árabe, muy popular en las panaderías de São Paulo.", a: ["esfiha", "esfirra"], d: "Esfiha" },
+  { l: "F", k: "Empieza con F", q: "Plato nacional de porotos negros y carne de cerdo que se come tradicionalmente los sábados.", a: ["feijoada"], d: "Feijoada" },
+  { l: "G", k: "Empieza con G", q: "Fruta amazónica cuya semilla le da el nombre a la gaseosa más famosa de Brasil.", a: ["guarana"], d: "Guaraná" },
+  { l: "H", k: "Empieza con H", q: "Marca brasileña de ojotas famosa en todo el mundo.", a: ["havaianas", "havaiana"], d: "Havaianas" },
+  { l: "I", k: "Empieza con I", q: "Barrio y playa de Río inmortalizados en una canción sobre una chica que pasa caminando.", a: ["ipanema"], d: "Ipanema" },
+  { l: "J", k: "Empieza con J", q: "Fruta de piel negra y pulpa blanca que crece pegada al tronco del árbol.", a: ["jabuticaba"], d: "Jabuticaba" },
+  { l: "K", k: "Empieza con K", q: "Deporte que se practica con una cometa y una tabla, muy popular en las playas del nordeste.", a: ["kitesurf", "kitesurfing", "kitesurfin"], d: "Kitesurf" },
+  { l: "L", k: "Empieza con L", q: "Barrio carioca famoso por sus arcos blancos y su vida nocturna.", a: ["lapa"], d: "Lapa" },
+  { l: "M", k: "Empieza con M", q: "Mítico estadio de Río, sede de la final del Mundial 2014 en la que Alemania venció a Argentina.", a: ["maracana"], d: "Maracaná" },
+  { l: "N", k: "Empieza con N", q: "Capital de Rio Grande do Norte, famosa por sus dunas.", a: ["natal"], d: "Natal" },
+  { l: "O", k: "Empieza con O", q: "Cómo dice «gracias» un hombre en portugués.", a: ["obrigado", "obrigada"], d: "Obrigado" },
+  { l: "P", k: "Empieza con P", q: "Pueblo colonial de la Costa Verde de Río, patrimonio mundial de la UNESCO.", a: ["paraty", "parati"], d: "Paraty" },
+  { l: "Q", k: "Empieza con Q", q: "En portugués, el queso.", a: ["queijo"], d: "Queijo" },
+  { l: "R", k: "Empieza con R", q: "Moneda oficial de Brasil.", a: ["real", "reais", "reales"], d: "Real" },
+  { l: "S", k: "Empieza con S", q: "Ritmo brasileño por excelencia, protagonista del Carnaval.", a: ["samba"], d: "Samba" },
+  { l: "T", k: "Empieza con T", q: "Crepe sin gluten hecho con almidón de mandioca, típico del desayuno nordestino.", a: ["tapioca"], d: "Tapioca" },
+  { l: "U", k: "Empieza con U", q: "Barrio de Río al pie del Pão de Açúcar.", a: ["urca"], d: "Urca" },
+  { l: "V", k: "Empieza con V", q: "En portugués, el vóley.", a: ["volei"], d: "Vôlei" },
+  { l: "W", k: "Empieza con W", q: "Deporte de tabla con vela, muy popular en las playas ventosas del nordeste.", a: ["windsurf", "windsurfing"], d: "Windsurf" },
+  { l: "X", k: "Contiene la X", q: "En portugués, el pescado.", a: ["peixe"], d: "Peixe" },
+  { l: "Y", k: "Contiene la Y", q: "Piloto de Fórmula 1 tricampeón del mundo, ídolo nacional que murió en Imola en 1994.", a: ["ayrton", "senna", "ayrtonsenna"], d: "Ayrton Senna" },
+  { l: "Z", k: "Empieza con Z", q: "Apodo «el Pelé blanco»: ídolo del Flamengo en los años 80.", a: ["zico"], d: "Zico" }
+];
+
+const TRIVIA = [
+  { q: "¿Cuál es la capital de Brasil?", a: "Brasilia", w: ["Río de Janeiro", "São Paulo", "Salvador"] },
+  { q: "¿Cómo agradece una mujer en portugués?", a: "Obrigada", w: ["Obrigado", "Gracias", "Por nada"] },
+  { q: "¿Qué destilado lleva la caipirinha?", a: "Cachaça", w: ["Ron blanco", "Vodka", "Pisco"] },
+  { q: "¿En qué cerro de Río está el Cristo Redentor?", a: "Corcovado", w: ["Pão de Açúcar", "Dois Irmãos", "Pedra da Gávea"] },
+  { q: `¿Qué es un «pão de queijo»?`, a: "Un bollito de queso y mandioca", w: ["Un sándwich de jamón y queso", "Un pastel frito de queso", "Un alfajor relleno de queso"] },
+  { q: "¿Cuál es el estado más grande de Brasil por superficie?", a: "Amazonas", w: ["Pará", "Minas Gerais", "Bahía"] },
+  { q: "¿Qué cataratas se pueden visitar desde Argentina y desde Brasil?", a: "Las del Iguazú", w: ["Salto Ángel", "Niágara", "Victoria"] },
+  { q: "En un restaurante, ¿cómo pedís la cuenta?", a: "A conta, por favor", w: ["O cardápio, por favor", "A gorjeta, por favor", "A mesa, por favor"] },
+  { q: `¿Qué significa «saudade»?`, a: "Nostalgia por algo o alguien ausente", w: ["Alegría de carnaval", "Cansancio de playa", "Hambre de feijoada"] },
+  { q: "¿En qué año fue el último Mundial masculino jugado en Brasil?", a: "2014", w: ["2010", "2018", "2006"] }
+];
+
+/* [categoría, español, portugués, cómo se dice para un oído argentino] */
+const PHR = [
+  ["Básicos", "Hola", "Oi", "oi"],
+  ["Básicos", "Buen día", "Bom dia", "bom DI-a"],
+  ["Básicos", "Buenas tardes", "Boa tarde", "BO-a TAR-chi"],
+  ["Básicos", "Buenas noches", "Boa noite", "BO-a NOI-chi"],
+  ["Básicos", "Gracias (dice un hombre / una mujer)", "Obrigado / Obrigada", "obri-GA-du / obri-GA-da"],
+  ["Básicos", "Por favor", "Por favor", "por fa-VOR"],
+  ["Básicos", "Perdón / Permiso para pasar", "Desculpa / Com licença", "des-KUL-pa / kom li-SEN-sa"],
+  ["Básicos", "No entiendo", "Não entendi", "naun en-TEN-dyi"],
+  ["Básicos", "¿Hablás español?", "Você fala espanhol?", "vo-SE FA-la es-pa-NYOL"],
+  ["Básicos", "¿Podés hablar más despacio?", "Pode falar mais devagar?", "PO-dyi fa-LAR mais de-va-GAR"],
+  ["Comer", "Una mesa para cuatro, por favor", "Uma mesa para quatro, por favor", "U-ma ME-za PA-ra KUA-tru"],
+  ["Comer", "La cuenta, por favor", "A conta, por favor", "a KON-ta por fa-VOR"],
+  ["Comer", "¿Qué me recomienda?", "O que você recomenda?", "u ki vo-SE he-ko-MEN-da"],
+  ["Comer", "Sin picante", "Sem pimenta", "sem pi-MEN-ta"],
+  ["Comer", "Agua sin gas / con gas", "Água sem gás / com gás", "A-gua sem gas / kom gas"],
+  ["Comer", "Una cerveza bien fría", "Uma cerveja bem gelada", "U-ma ser-VE-zha bem zhe-LA-da"],
+  ["Comer", "Tengo alergia a…", "Tenho alergia a…", "TE-nyu a-ler-ZHI-a a"],
+  ["Comer", "¿Aceptan tarjeta?", "Aceita cartão?", "a-SEI-ta kar-TAUN"],
+  ["Comer", "Está buenísimo", "Está uma delícia", "es-TA U-ma de-LI-sia"],
+  ["Comer", "Para llevar", "Para viagem", "PA-ra vi-A-zhem"],
+  ["Moverse", "¿Dónde queda…?", "Onde fica…?", "ON-dyi FI-ka"],
+  ["Moverse", "¿Cuánto sale hasta…?", "Quanto custa até…?", "KUAN-tu KUS-ta a-TE"],
+  ["Moverse", "Pare acá, por favor", "Pode parar aqui, por favor", "PO-dyi pa-RAR a-KI"],
+  ["Moverse", "¿A qué hora sale el próximo colectivo?", "A que horas sai o próximo ônibus?", "a ki O-ras sai u PRO-si-mu O-ni-bus"],
+  ["Moverse", "Estoy perdido / perdida", "Estou perdido / perdida", "es-TOU per-DI-du / per-DI-da"],
+  ["Moverse", "Al aeropuerto, por favor", "Para o aeroporto, por favor", "PA-ra u a-e-ro-POR-tu por fa-VOR"],
+  ["Playa y salir", "¿Cuánto sale alquilar una sombrilla?", "Quanto custa alugar um guarda-sol?", "KUAN-tu KUS-ta a-lu-GAR un GUAR-da SOL"],
+  ["Playa y salir", "Protector solar", "Protetor solar", "pro-te-TOR so-LAR"],
+  ["Playa y salir", "¿Es seguro nadar acá?", "É seguro nadar aqui?", "e se-GU-ru na-DAR a-KI"],
+  ["Playa y salir", "Una caipirinha, por favor", "Uma caipirinha, por favor", "U-ma kai-pi-RI-nya por fa-VOR"],
+  ["Playa y salir", "¿Qué hay para hacer hoy a la noche?", "O que tem para fazer hoje à noite?", "u ki tem PA-ra fa-ZER O-zhi a NOI-chi"],
+  ["Playa y salir", "¿Nos sacás una foto?", "Pode tirar uma foto da gente?", "PO-dyi chi-RAR U-ma FO-tu da ZHEN-chi"],
+  ["Plata", "¿Cuánto sale?", "Quanto custa?", "KUAN-tu KUS-ta"],
+  ["Plata", "Muy caro", "Muito caro", "MUIN-tu KA-ru"],
+  ["Plata", "¿Tiene algo más barato?", "Tem algo mais barato?", "tem AL-gu mais ba-RA-tu"],
+  ["Plata", "¿Puedo pagar con tarjeta de crédito?", "Posso pagar no cartão de crédito?", "PO-su pa-GAR nu kar-TAUN dyi KRE-di-tu"],
+  ["Emergencias", "Necesito ayuda", "Preciso de ajuda", "pre-SI-zu dyi a-ZHU-da"],
+  ["Emergencias", "¡Llamen a una ambulancia!", "Chame uma ambulância!", "SHA-mi U-ma am-bu-LAN-sia"],
+  ["Emergencias", "Me robaron", "Fui roubado / roubada", "fui ho-BA-du / ho-BA-da"],
+  ["Emergencias", "Necesito un médico", "Preciso de um médico", "pre-SI-zu dyi un ME-di-ku"],
+  ["Emergencias", "¿Dónde hay una farmacia?", "Onde tem uma farmácia?", "ON-dyi tem U-ma far-MA-sia"]
+];
+const PCATS = ["Todo", "Básicos", "Comer", "Moverse", "Playa y salir", "Plata", "Emergencias"];
+
+const FALSOS = [
+  ["esquisito", "raro, extraño (no «exquisito»)"],
+  ["apelido", "apodo (el apellido es «sobrenome»)"],
+  ["copo", "vaso (el «vaso» es un jarrón o maceta)"],
+  ["oficina", "taller mecánico (la oficina es «escritório»)"],
+  ["largo", "ancho (largo se dice «comprido»)"],
+  ["embaraçada", "avergonzada (embarazada es «grávida»)"]
+];
+
+/* ---------- ejemplo (solo se muestra hasta que armen su viaje) ---------- */
+function exampleState() {
+  const m = ["x1", "x2", "x3", "x4"];
+  return {
+    meta: { ready: false, dest: "Río de Janeiro", start: "2026-12-14", end: "2026-12-21", base: "ARS", rates: { BRL: 250, USD: 1400 }, ratesSet: false,
+      members: [{ id: m[0], name: "Lucas" }, { id: m[1], name: "Sofi" }, { id: m[2], name: "Nacho" }, { id: m[3], name: "Cami" }] },
+    expenses: [
+      { id: "e1", desc: "Adelanto del alojamiento", amt: 400, cur: "USD", payer: m[0], split: m, date: "2026-11-05", cat: "Alojamiento" },
+      { id: "e2", desc: "Cena en Lapa", amt: 380, cur: "BRL", payer: m[1], split: m, date: "2026-12-16", cat: "Comida" },
+      { id: "e3", desc: "Caipirinhas en Arpoador", amt: 96, cur: "BRL", payer: m[2], split: [m[0], m[2], m[3]], date: "2026-12-15", cat: "Salidas" },
+      { id: "e4", desc: "Sombrilla y reposeras", amt: 60, cur: "BRL", payer: m[3], split: m, date: "2026-12-15", cat: "Otros" },
+      { id: "e5", desc: "Remís al aeropuerto", amt: 60000, cur: "ARS", payer: m[0], split: m, date: "2026-12-14", cat: "Transporte" }
+    ],
+    items: [
+      { id: "i1", date: "2026-12-14", time: "06:40", title: "Vuelo Buenos Aires → Río", place: "", type: "Vuelo" },
+      { id: "i2", date: "2026-12-14", time: "14:00", title: "Check-in en el departamento", place: "Ipanema, Río de Janeiro", type: "Alojamiento" },
+      { id: "i3", date: "2026-12-15", time: "10:00", title: "Playa de Ipanema", place: "Praia de Ipanema, Río de Janeiro", type: "Actividad" },
+      { id: "i4", date: "2026-12-15", time: "18:30", title: "Atardecer en Arpoador", place: "Pedra do Arpoador, Río de Janeiro", type: "Actividad" },
+      { id: "i5", date: "2026-12-16", time: "08:00", title: "Cristo Redentor (Corcovado)", place: "Cristo Redentor, Río de Janeiro", type: "Actividad" },
+      { id: "i6", date: "2026-12-16", time: "21:00", title: "Cena y música en Lapa", place: "Arcos da Lapa, Río de Janeiro", type: "Comida" },
+      { id: "i7", date: "2026-12-17", time: "16:00", title: "Pão de Açúcar al atardecer", place: "Pão de Açúcar, Río de Janeiro", type: "Actividad" },
+      { id: "i8", date: "", time: "", title: "Probar una feijoada de sábado", place: "", type: "Comida" }
+    ],
+    scores: [], questions: []
+  };
+}
+/* ---------- estado y almacenamiento ---------- */
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+const norm = s => String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]/g, "");
+const LS = "viajecinho-v1";
+const blankMeta = () => ({ ready: false, dest: "Río de Janeiro", start: "2026-12-14", end: "2026-12-21", base: "ARS", rates: { BRL: 250, USD: 1400 }, ratesSet: false, members: [] });
+const blank = () => ({ meta: blankMeta(), expenses: [], items: [], scores: [], questions: [] });
+const EX = exampleState();
+let S = blank(), db = null, loading = false, tab = "gastos", syncState = "local";
+
+try {
+  const raw = localStorage.getItem(LS);
+  if (raw) { const p = JSON.parse(raw); if (p && p.meta) S = Object.assign(blank(), p, { meta: Object.assign(blankMeta(), p.meta) }); }
+} catch (e) {}
+const D = () => (S.meta.ready ? S : EX);
+const isEx = () => !S.meta.ready;
+const saveLocal = () => { if (!db) { try { localStorage.setItem(LS, JSON.stringify(S)); } catch (e) {} } };
+const errMsg = () => toast("No se pudo guardar. Revisá la conexión y los permisos.");
+
+function put(coll, obj) {
+  const i = S[coll].findIndex(x => x.id === obj.id);
+  if (i >= 0) S[coll][i] = obj; else S[coll].push(obj);
+  saveLocal();
+  if (db) db.collection(coll).doc(obj.id).set(obj).catch(errMsg);
+  render();
+}
+function del(coll, id) {
+  S[coll] = S[coll].filter(x => x.id !== id);
+  saveLocal();
+  if (db) db.collection(coll).doc(id).delete().catch(errMsg);
+  render();
+}
+function setMeta(m) {
+  S.meta = m; saveLocal();
+  if (db) db.doc("meta/main").set(m).catch(errMsg);
+  render();
+}
+
+function attachDb(handle) {
+  db = handle; loading = true; syncState = "connecting"; S = blank(); paintSync();
+  const timer = setTimeout(() => { if (loading) { loading = false; syncState = "slow"; paintSync(); } }, 10000);
+  const done = snap => { if (!snap.metadata.fromCache) { loading = false; clearTimeout(timer); if (syncState !== "live") { syncState = "live"; paintSync(); } } };
+  const bad = () => { syncState = "slow"; paintSync(); };
+  db.doc("meta/main").onSnapshot(s => {
+    S.meta = s.exists ? Object.assign(blankMeta(), s.data()) : blankMeta();
+    done(s); remoteRender("meta");
+  }, bad);
+  ["expenses", "items", "scores", "questions"].forEach(c => db.collection(c).onSnapshot(s => {
+    S[c] = s.docs.map(d => d.data()); done(s); remoteRender(c);
+  }, bad));
+}
+function remoteRender(c) {
+  if (tab === "juego" && (G.rosco || G.trivia)) return;
+  if (tab === "frases") return;
+  render();
+}
+function paintSync() {
+  const el = $("#sync"); if (!el) return;
+  const t = { local: "Solo este celular", connecting: "Conectando…", live: "En vivo con el grupo", slow: "Sin conexión con el grupo" }[syncState];
+  el.className = "sync" + (syncState === "live" ? " live" : "");
+  el.lastChild.textContent = t;
+}
+
+/* ---------- utilidades ---------- */
+let toastT;
+function toast(msg) {
+  const t = $("#toast"); t.textContent = msg; t.hidden = false;
+  clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 2800);
+}
+const dlg = $("#dlg");
+function openDlg(html, mount) { dlg.innerHTML = '<div class="dlg">' + html + "</div>"; if (!dlg.open) dlg.showModal(); if (mount) mount(dlg); }
+function closeDlg() { if (dlg.open) dlg.close(); }
+dlg.addEventListener("click", e => { if (e.target === dlg) closeDlg(); });
+
+function copyText(txt, okMsg) {
+  const fallback = () => openDlg('<h2>Copiá el texto</h2><textarea id="cp" readonly>' + esc(txt) + '</textarea><div class="acts"><button class="btn" data-act="close" type="button">Cerrar</button></div>',
+    d => { const t = $("#cp", d); t.focus(); t.select(); });
+  try { navigator.clipboard.writeText(txt).then(() => toast(okMsg || "Copiado"), fallback); } catch (e) { fallback(); }
+}
+const rate = c => (c === "ARS" ? 1 : (+D().meta.rates[c] || 1));
+const conv = (a, c) => a * rate(c) / rate(D().meta.base);
+const expV = e => (+e.ars > 0 && e.cur !== "ARS") ? +e.ars / rate(D().meta.base) : conv(+e.amt || 0, e.cur);
+function money(v, c) {
+  try { return new Intl.NumberFormat("es-AR", { style: "currency", currency: c, maximumFractionDigits: c === "ARS" ? 0 : 2 }).format(v); }
+  catch (e) { return SYM[c] + " " + Math.round(v); }
+}
+const mname = id => { const m = D().meta.members.find(x => x.id === id); return m ? m.name : "—"; };
+const dateOf = iso => new Date(iso + "T12:00:00");
+const fmtDate = iso => { try { return dateOf(iso).toLocaleDateString("es-AR", { weekday: "short", day: "numeric", month: "short" }).replace(".", ""); } catch (e) { return iso; } };
+const todayISO = () => { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
+
+/* ---------- gastos ---------- */
+function calc() {
+  const d = D(), ms = d.meta.members, ids = new Set(ms.map(m => m.id));
+  const paid = {}, owe = {}; ms.forEach(m => { paid[m.id] = 0; owe[m.id] = 0; });
+  let total = 0;
+  d.expenses.forEach(e => {
+    const v = expV(e); total += v;
+    if (ids.has(e.payer)) paid[e.payer] += v;
+    const sp = (e.split || []).filter(i => ids.has(i));
+    sp.forEach(i => { owe[i] += v / sp.length; });
+  });
+  const net = ms.map(m => ({ m, paid: paid[m.id], owe: owe[m.id], net: paid[m.id] - owe[m.id] }));
+  const cr = net.filter(x => x.net > 0.005).map(x => ({ m: x.m, v: x.net })).sort((a, b) => b.v - a.v);
+  const de = net.filter(x => x.net < -0.005).map(x => ({ m: x.m, v: -x.net })).sort((a, b) => b.v - a.v);
+  const pays = []; let i = 0, j = 0;
+  while (i < de.length && j < cr.length) {
+    const x = Math.min(de[i].v, cr[j].v);
+    pays.push({ from: de[i].m, to: cr[j].m, v: x });
+    de[i].v -= x; cr[j].v -= x;
+    if (de[i].v < 0.005) i++; if (cr[j].v < 0.005) j++;
+  }
+  return { total, net, pays };
+}
+
+function vGastos() {
+  const d = D(), base = d.meta.base, c = calc(), ms = d.meta.members;
+  const max = Math.max(1, ...c.net.map(x => Math.abs(x.net)));
+  const per = ms.length ? c.total / ms.length : 0;
+  const rl = CURS.filter(x => x !== base).map(x => "1 " + SYM[x] + " = " + money(rate(x) / rate(base), base)).join(" · ");
+  let h = '<section class="card"><div class="eyebrow">Total del grupo</div><div class="total num">' + money(c.total, base) + '</div>' +
+    '<div class="stats"><div class="stat"><div class="eyebrow">Por persona</div><div class="v num">' + money(per, base) + '</div></div>' +
+    '<div class="stat"><div class="eyebrow">Gastos cargados</div><div class="v num">' + d.expenses.length + '</div></div></div>' +
+    '<p class="small muted" style="margin:12px 0 0">Cotización: ' + rl + (d.meta.ratesSet ? "" : " (de ejemplo)") + ' · <a href="#" data-act="settings" style="color:var(--accent)">cambiar</a></p></section>';
+  h += '<section class="card"><h2>Saldos</h2>';
+  if (!ms.length) h += '<div class="empty">Cargá a las personas del viaje en Ajustes.</div>';
+  c.net.forEach(x => {
+    const w = Math.min(50, Math.abs(x.net) / max * 50);
+    const cls = x.net > 0.005 ? "pos" : x.net < -0.005 ? "neg" : "";
+    h += '<div class="bal"><div class="name">' + esc(x.m.name) + '</div><div class="track">' + (cls ? '<div class="fill ' + cls + '" style="width:' + w + '%"></div>' : "") + '</div>' +
+      '<div class="num ' + (cls === "pos" ? "pos-t" : cls === "neg" ? "neg-t" : "muted") + '" style="font-weight:700;text-align:right">' +
+      (cls === "pos" ? "+" : cls === "neg" ? "−" : "") + money(Math.abs(x.net), base) + "</div></div>";
+  });
+  h += '<p class="small muted" style="margin:8px 0 0">Verde: le deben plata. Rojo: debe plata.</p></section>';
+  h += '<section class="card"><h2>Para saldar</h2>';
+  if (!c.pays.length) h += '<div class="empty">Están a mano. No se debe nada.</div>';
+  c.pays.forEach(p => { h += '<div class="pay"><b>' + esc(p.from.name) + '</b><span class="arrow">le paga a</span><b>' + esc(p.to.name) + '</b><span class="num" style="margin-left:auto;font-weight:700">' + money(p.v, base) + "</span></div>"; });
+  h += '<div class="row" style="margin-top:12px"><button class="btn" data-act="copysum" type="button">Copiar resumen para WhatsApp</button></div></section>';
+  h += '<section class="card"><h2>Gastos</h2>';
+  if (!d.expenses.length) h += '<div class="empty">Todavía no hay gastos. Tocá «Agregar gasto».</div>';
+  const list = d.expenses.slice().sort((a, b) => (b.date || "").localeCompare(a.date || "") || b.id.localeCompare(a.id));
+  let last = null;
+  list.forEach(e => {
+    if (e.date !== last) { h += '<div class="day-h">' + (e.date ? esc(fmtDate(e.date)) : "Sin fecha") + "</div>"; last = e.date; }
+    const sp = (e.split || []).filter(i => ms.some(m => m.id === i));
+    const who = sp.length === ms.length ? "entre todos" : "entre " + sp.map(i => esc(mname(i))).join(", ");
+    h += '<button class="exp" data-act="editexp" data-id="' + esc(e.id) + '" type="button"><div><div class="d">' + esc(e.desc) + '</div>' +
+      '<div class="small muted"><span class="tag">' + esc(e.cat || "Otros") + "</span>Pagó " + esc(mname(e.payer)) + " · " + who + '</div></div>' +
+      '<div class="amt num">' + money(+e.amt || 0, e.cur) + (e.cur !== base ? '<div class="small muted" style="font-weight:500">' + money(expV(e), base) + (+e.ars > 0 && e.cur !== "ARS" ? " · $ " + (e.ars / e.amt).toFixed(1).replace(".", ",") + " por " + SYM[e.cur] : "") + "</div>" : "") + "</div></button>";
+  });
+  return h + "</section>";
+}
+
+function summaryText() {
+  const d = D(), base = d.meta.base, c = calc();
+  let t = "*Gastos del viaje" + (d.meta.dest ? " · " + d.meta.dest : "") + "*\nTotal: " + money(c.total, base) + "\n\n*Saldos*\n";
+  c.net.forEach(x => { t += "• " + x.m.name + ": " + (x.net > 0.005 ? "le deben " + money(x.net, base) : x.net < -0.005 ? "debe " + money(-x.net, base) : "a mano") + "\n"; });
+  t += "\n*Para saldar*\n";
+  t += c.pays.length ? c.pays.map(p => p.from.name + " → " + p.to.name + ": " + money(p.v, base)).join("\n") : "Están a mano";
+  return t;
+}
+
+function expForm(id) {
+  const d = D(), ms = d.meta.members, e = id ? S.expenses.find(x => x.id === id) : null;
+  const v = e || { desc: "", amt: "", cur: "BRL", payer: ms[0] && ms[0].id, split: ms.map(m => m.id), date: todayISO(), cat: "Comida" };
+  openDlg('<h2>' + (e ? "Editar gasto" : "Agregar gasto") + '</h2><form id="f">' +
+    '<label class="f" for="fd">Qué fue</label><input type="text" id="fd" value="' + esc(v.desc) + '" placeholder="Ej: Almuerzo en la playa" autocomplete="off">' +
+    '<div class="row" style="align-items:flex-end"><div class="grow"><label class="f" for="fa">Monto</label><input type="number" id="fa" inputmode="decimal" step="any" min="0" value="' + esc(v.amt) + '"></div>' +
+    '<div style="width:130px"><label class="f" for="fc">Moneda</label><select id="fc">' + CURS.map(c => '<option value="' + c + '"' + (c === v.cur ? " selected" : "") + ">" + SYM[c] + " " + { BRL: "reales", ARS: "pesos", USD: "dólares" }[c] + "</option>").join("") + "</select></div></div>" +
+    '<label class="f" for="fr">Pesos que te descontó la billetera (opcional)</label><input type="number" id="fr" inputmode="decimal" step="any" min="0" value="' + esc(v.ars || "") + '" placeholder="Ej: lo que te debitó Mercado Pago"><p class="small muted" style="margin:4px 0 0">Si pagaste con Pix o tarjeta, cargá cuántos pesos te debitaron. La app usa esa cotización real para este gasto.</p>' + '<label class="f" for="fp">Pagó</label><select id="fp">' + ms.map(m => '<option value="' + esc(m.id) + '"' + (m.id === v.payer ? " selected" : "") + ">" + esc(m.name) + "</option>").join("") + "</select>" +
+    '<label class="f">Se reparte entre</label><div class="checks">' + ms.map(m => '<label><input type="checkbox" name="sp" value="' + esc(m.id) + '"' + ((v.split || []).includes(m.id) ? " checked" : "") + "> " + esc(m.name) + "</label>").join("") + "</div>" +
+    '<div class="row"><div class="grow"><label class="f" for="fdt">Fecha</label><input type="date" id="fdt" value="' + esc(v.date) + '"></div>' +
+    '<div class="grow"><label class="f" for="fk">Categoría</label><select id="fk">' + CATS.map(c => "<option" + (c === v.cat ? " selected" : "") + ">" + c + "</option>").join("") + "</select></div></div>" +
+    '<div class="acts">' + (e ? '<button class="btn danger" type="button" data-act="delexp" data-id="' + esc(e.id) + '" style="margin-right:auto">Eliminar</button>' : "") +
+    '<button class="btn" type="button" data-act="close">Cancelar</button><button class="btn primary" type="submit">Guardar</button></div></form>',
+    d2 => {
+      $("#f", d2).addEventListener("submit", ev => {
+        ev.preventDefault();
+        const desc = $("#fd", d2).value.trim(), amt = parseFloat($("#fa", d2).value), sp = [...d2.querySelectorAll('input[name="sp"]:checked')].map(x => x.value);
+        if (!desc) return toast("Escribí qué fue el gasto");
+        if (!(amt > 0)) return toast("Cargá un monto mayor a cero");
+        if (!sp.length) return toast("Elegí entre quiénes se reparte");
+        put("expenses", { id: e ? e.id : uid(), desc, amt, cur: $("#fc", d2).value, payer: $("#fp", d2).value, split: sp, date: $("#fdt", d2).value, cat: $("#fk", d2).value, ...(parseFloat($("#fr", d2).value) > 0 ? { ars: parseFloat($("#fr", d2).value) } : {}) });
+        closeDlg();
+      });
+      if (!e) $("#fd", d2).focus();
+    });
+}
+/* ---------- plan ---------- */
+const mapsUrl = p => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(p);
+
+function vPlan() {
+  const d = D(), m = d.meta, today = todayISO();
+  const days = new Set(d.items.map(i => i.date).filter(Boolean));
+  if (m.start && m.end) {
+    const a = dateOf(m.start), b = dateOf(m.end);
+    for (let t = new Date(a), n = 0; t <= b && n < 45; t.setDate(t.getDate() + 1), n++) {
+      days.add(t.getFullYear() + "-" + String(t.getMonth() + 1).padStart(2, "0") + "-" + String(t.getDate()).padStart(2, "0"));
+    }
+  }
+  const sorted = [...days].sort();
+  let cnt = '<span class="muted">Cargá las fechas del viaje en Ajustes.</span>';
+  if (m.start) {
+    const toStart = Math.round((dateOf(m.start) - dateOf(today)) / 864e5);
+    const toEnd = m.end ? Math.round((dateOf(m.end) - dateOf(today)) / 864e5) : toStart;
+    if (toStart > 0) cnt = '<b class="num">' + toStart + "</b><span>" + (toStart === 1 ? "día para salir" : "días para salir") + "</span>";
+    else if (toEnd >= 0) cnt = '<b class="num">' + (1 - toStart) + "</b><span>de " + (m.end ? Math.round((dateOf(m.end) - dateOf(m.start)) / 864e5) + 1 : "?") + " días de viaje</span>";
+    else cnt = "<span class=\"muted\">El viaje ya terminó. ¡Que lo disfruten los recuerdos!</span>";
+  }
+  let h = '<section class="card"><div class="eyebrow">' + esc(m.dest || "Destino sin cargar") + '</div><div class="count" style="margin-top:6px">' + cnt + "</div></section>";
+  sorted.forEach(dt => {
+    const its = d.items.filter(i => i.date === dt).sort((a, b) => (a.time || "99").localeCompare(b.time || "99"));
+    h += '<section class="card"><div class="day' + (dt === today ? " today" : "") + '"><div class="row between"><h3>' + esc(fmtDate(dt)) + (dt === today ? ' <span class="tag" style="background:var(--sun);color:var(--sun-ink)">Hoy</span>' : "") +
+      '</h3><button class="btn sm ghost" type="button" data-act="additem" data-date="' + dt + '">+ Agregar</button></div>';
+    if (!its.length) h += '<div class="small muted" style="padding:8px 0">Día libre. Agregá un plan.</div>';
+    its.forEach(i => { h += itemRow(i); });
+    h += "</div></section>";
+  });
+  const free = d.items.filter(i => !i.date);
+  h += '<section class="card"><div class="row between"><h2 style="margin:0">Ideas sin día</h2><button class="btn sm ghost" type="button" data-act="additem" data-date="">+ Agregar</button></div>';
+  if (!free.length) h += '<div class="small muted" style="padding:8px 0">Lugares o planes que todavía no tienen fecha.</div>';
+  free.forEach(i => { h += itemRow(i); });
+  return h + "</section>";
+}
+function itemRow(i) {
+  return '<div class="item"><div class="t num">' + esc(i.time || "—") + '</div><div><button type="button" class="ti" data-act="edititem" data-id="' + esc(i.id) + '" style="background:none;border:0;padding:0;text-align:left;color:inherit">' + esc(i.title) + '</button>' +
+    '<div class="small"><span class="tag">' + esc(i.type || "Actividad") + "</span>" + (i.place ? '<a href="' + mapsUrl(i.place) + '" target="_blank" rel="noopener">Ver en el mapa</a>' : "") + "</div></div></div>";
+}
+function itemForm(id, date) {
+  const it = id ? S.items.find(x => x.id === id) : null;
+  const v = it || { date: date || "", time: "", title: "", place: "", type: "Actividad" };
+  openDlg('<h2>' + (it ? "Editar plan" : "Agregar plan") + '</h2><form id="f"><label class="f" for="it">Qué van a hacer</label><input type="text" id="it" value="' + esc(v.title) + '" placeholder="Ej: Cristo Redentor" autocomplete="off">' +
+    '<div class="row"><div class="grow"><label class="f" for="id">Día</label><input type="date" id="id" value="' + esc(v.date) + '"></div><div class="grow"><label class="f" for="ih">Hora</label><input type="time" id="ih" value="' + esc(v.time) + '"></div></div>' +
+    '<label class="f" for="ip">Lugar (para abrirlo en el mapa)</label><input type="text" id="ip" value="' + esc(v.place) + '" placeholder="Ej: Cristo Redentor, Río de Janeiro">' +
+    '<label class="f" for="ik">Tipo</label><select id="ik">' + TYPES.map(t => "<option" + (t === v.type ? " selected" : "") + ">" + t + "</option>").join("") + "</select>" +
+    '<div class="acts">' + (it ? '<button class="btn danger" type="button" data-act="delitem" data-id="' + esc(it.id) + '" style="margin-right:auto">Eliminar</button>' : "") +
+    '<button class="btn" type="button" data-act="close">Cancelar</button><button class="btn primary" type="submit">Guardar</button></div></form>',
+    d2 => {
+      $("#f", d2).addEventListener("submit", ev => {
+        ev.preventDefault();
+        const title = $("#it", d2).value.trim();
+        if (!title) return toast("Escribí qué van a hacer");
+        put("items", { id: it ? it.id : uid(), date: $("#id", d2).value, time: $("#ih", d2).value, title, place: $("#ip", d2).value.trim(), type: $("#ik", d2).value });
+        closeDlg();
+      });
+      if (!it) $("#it", d2).focus();
+    });
+}
+
+/* ---------- juego ---------- */
+const G = { mode: "rosco", player: "", rosco: null, trivia: null };
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+function playerSel() {
+  const ms = D().meta.members;
+  if (!G.player || !ms.some(m => m.name === G.player)) G.player = ms[0] ? ms[0].name : "";
+  return '<label class="f" for="gp" style="margin-top:0">Juega</label><select id="gp" data-chg="gplayer">' + ms.map(m => "<option" + (m.name === G.player ? " selected" : "") + ">" + esc(m.name) + "</option>").join("") + "</select>";
+}
+function saveScore(game, pts, total) {
+  if (isEx()) return;
+  put("scores", { id: uid(), game, player: G.player, pts, total, ts: Date.now() });
+}
+function vRanking() {
+  const sc = D().scores; let h = '<section class="card"><h2>Ranking del grupo</h2>';
+  if (!sc.length) return h + '<div class="empty">Todavía nadie jugó. El que gane paga la primera caipirinha.</div></section>';
+  [["rosco", "Rosco"], ["trivia", "Trivia"]].forEach(([g, label]) => {
+    const best = {};
+    sc.filter(s => s.game === g).forEach(s => { if (!best[s.player] || s.pts > best[s.player].pts) best[s.player] = s; });
+    const rows = Object.values(best).sort((a, b) => b.pts - a.pts).slice(0, 5);
+    if (!rows.length) return;
+    h += '<div class="eyebrow" style="margin:10px 0 2px">' + label + "</div>";
+    rows.forEach((s, i) => { h += '<div class="rank"><span>' + (i + 1) + ". " + esc(s.player) + '</span><b class="num">' + s.pts + "/" + s.total + "</b></div>"; });
+  });
+  return h + "</section>";
+}
+
+function vJuego() {
+  let h = '<div class="seg" role="group" aria-label="Juego"><button type="button" data-act="gmode" data-m="rosco" aria-pressed="' + (G.mode === "rosco") + '">Rosco</button><button type="button" data-act="gmode" data-m="trivia" aria-pressed="' + (G.mode === "trivia") + '">Trivia</button></div>';
+  h += G.mode === "rosco" ? (G.rosco ? (G.rosco.done ? roscoEnd() : roscoPlay()) : roscoStart()) : (G.trivia ? (G.trivia.done ? triviaEnd() : triviaPlay()) : triviaStart());
+  return h + vRanking();
+}
+
+/* rosco */
+function roscoStart() {
+  return '<section class="card"><h2>Rosco de Brasil</h2><p class="muted" style="margin:0 0 4px">26 letras y 150 segundos. Escribí la respuesta o tocá «Pasapalabra» para volver más tarde. No importan los acentos.</p>' + playerSel() +
+    '<div class="row" style="margin-top:14px"><button class="btn primary" type="button" data-act="rstart">Empezar</button></div></section>';
+}
+function roscoPlay() {
+  const R = G.rosco, q = ROSCO[R.cur], N = ROSCO.length;
+  let svg = '<svg class="rosco" viewBox="0 0 340 340" role="img" aria-label="Rosco con ' + N + ' letras">';
+  ROSCO.forEach((r, i) => {
+    const a = -Math.PI / 2 + i * 2 * Math.PI / N, x = 170 + 146 * Math.cos(a), y = 170 + 146 * Math.sin(a);
+    svg += '<circle class="rl ' + (R.st[i] === "p" ? "" : R.st[i]) + (i === R.cur ? " cur" : "") + '" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="16"/><text class="rt" x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '">' + r.l + "</text>";
+  });
+  const ok = R.st.filter(s => s === "c").length;
+  svg += '<text id="rtime" x="170" y="160" text-anchor="middle" style="font:800 44px var(--f-display);fill:var(--ink)">' + R.t + '</text><text x="170" y="192" text-anchor="middle" style="font:600 14px var(--f-body);fill:var(--muted)">' + ok + " correctas</text></svg>";
+  return '<section class="card">' + svg + '<div class="eyebrow" style="margin-top:8px">' + esc(q.k) + '</div><div class="clue">' + esc(q.q) + '</div>' +
+    '<form id="rf" autocomplete="off"><input type="text" id="ra" placeholder="Tu respuesta" autocapitalize="none" autocorrect="off" spellcheck="false" aria-label="Tu respuesta">' +
+    '<div class="row" style="margin-top:10px"><button class="btn primary grow" type="submit">Responder</button><button class="btn grow" type="button" data-act="rpass">Pasapalabra</button><button class="btn ghost" type="button" data-act="rend">Terminar</button></div></form></section>';
+}
+function roscoEnd() {
+  const R = G.rosco, ok = R.st.filter(s => s === "c").length, miss = ROSCO.filter((r, i) => R.st[i] !== "c");
+  return '<section class="card"><div class="eyebrow">' + esc(R.player) + '</div><div class="total num">' + ok + ' / ' + ROSCO.length + '</div><p class="muted" style="margin:6px 0 0">' + (R.t <= 0 ? "Se acabó el tiempo." : "Terminó la ronda.") + (isEx() ? " En el ejemplo no se guarda el ranking." : "") + "</p>" +
+    (miss.length ? '<div class="eyebrow" style="margin:14px 0 6px">Las que faltaron</div><div class="small">' + miss.map(r => "<b>" + r.l + "</b> " + esc(r.d)).join(" · ") + "</div>" : '<p style="margin:12px 0 0"><b>¡Rosco perfecto!</b></p>') +
+    '<div class="row" style="margin-top:14px"><button class="btn primary" type="button" data-act="rstart">Jugar de nuevo</button><button class="btn" type="button" data-act="rclose">Cerrar</button></div></section>';
+}
+function roscoBegin() {
+  clearInterval(G.rosco && G.rosco.timer);
+  const R = G.rosco = { player: G.player, st: ROSCO.map(() => "p"), cur: 0, t: 150, done: false, timer: null };
+  R.timer = setInterval(() => {
+    R.t--;
+    const el = $("#rtime"); if (el) el.textContent = Math.max(R.t, 0);
+    if (R.t <= 0) roscoFinish();
+  }, 1000);
+  render(); focusRosco();
+}
+function focusRosco() { const i = $("#ra"); if (i) i.focus(); }
+function roscoFinish() {
+  const R = G.rosco; if (!R || R.done) return;
+  clearInterval(R.timer); R.done = true;
+  saveScore("rosco", R.st.filter(s => s === "c").length, ROSCO.length);
+  if (tab === "juego") render();
+}
+function roscoNext() {
+  const R = G.rosco, n = ROSCO.length;
+  for (let k = 1; k <= n; k++) { const i = (R.cur + k) % n; if (R.st[i] === "p" || R.st[i] === "s") { R.cur = i; render(); focusRosco(); return; } }
+  roscoFinish();
+}
+function roscoAnswer(txt) {
+  const R = G.rosco, q = ROSCO[R.cur];
+  if (!norm(txt)) { R.st[R.cur] = "s"; return roscoNext(); }
+  R.st[R.cur] = q.a.includes(norm(txt)) ? "c" : "w";
+  roscoNext();
+}
+
+/* trivia */
+function allQ() { return TRIVIA.concat(D().questions.map(x => ({ q: x.q, a: x.a, w: x.w, mine: true, id: x.id }))); }
+function triviaStart() {
+  const mine = D().questions;
+  let h = '<section class="card"><h2>Trivia del viaje</h2><p class="muted" style="margin:0 0 4px">' + allQ().length + " preguntas: las de Brasil y las que cargue el grupo. Una opción correcta por pregunta.</p>" + playerSel() +
+    '<div class="row" style="margin-top:14px"><button class="btn primary" type="button" data-act="tstart">Empezar</button><button class="btn" type="button" data-act="addq">Agregar pregunta del grupo</button></div></section>';
+  if (mine.length) {
+    h += '<section class="card"><h2>Preguntas del grupo</h2>';
+    mine.forEach(x => { h += '<div class="row between" style="padding:6px 0;border-top:1px solid var(--line)"><span class="grow">' + esc(x.q) + '</span><button class="btn sm danger" type="button" data-act="delq" data-id="' + esc(x.id) + '">Borrar</button></div>'; });
+    h += "</section>";
+  }
+  return h;
+}
+function triviaBegin() {
+  const qs = shuffle(allQ()).map(x => { const opts = shuffle([x.a].concat(x.w)); return { q: x.q, opts, ai: opts.indexOf(x.a) }; });
+  G.trivia = { player: G.player, qs, i: 0, pts: 0, picked: null, done: false };
+  render();
+}
+function triviaPlay() {
+  const T = G.trivia, q = T.qs[T.i];
+  let h = '<section class="card"><div class="eyebrow">Pregunta ' + (T.i + 1) + " de " + T.qs.length + " · " + T.pts + ' correctas</div><div class="clue" style="margin-top:8px">' + esc(q.q) + "</div>";
+  q.opts.forEach((o, i) => {
+    const cls = T.picked === null ? "" : i === q.ai ? " ok" : i === T.picked ? " no" : "";
+    h += '<button type="button" class="opt' + cls + '" data-act="tpick" data-i="' + i + '"' + (T.picked !== null ? " disabled" : "") + ">" + esc(o) + "</button>";
+  });
+  if (T.picked !== null) h += '<div class="row" style="margin-top:14px"><button class="btn primary" type="button" data-act="tnext">' + (T.i + 1 >= T.qs.length ? "Ver resultado" : "Siguiente") + "</button></div>";
+  return h + "</section>";
+}
+function triviaEnd() {
+  const T = G.trivia;
+  return '<section class="card"><div class="eyebrow">' + esc(T.player) + '</div><div class="total num">' + T.pts + " / " + T.qs.length + '</div><p class="muted" style="margin:6px 0 0">' + (isEx() ? "En el ejemplo no se guarda el ranking." : "Resultado guardado en el ranking.") + '</p>' +
+    '<div class="row" style="margin-top:14px"><button class="btn primary" type="button" data-act="tstart">Jugar de nuevo</button><button class="btn" type="button" data-act="tclose">Cerrar</button></div></section>';
+}
+function qForm() {
+  openDlg('<h2>Pregunta del grupo</h2><p class="small muted" style="margin:0">Ej: «¿Quién se duerme primero en el micro?» con los nombres como opciones.</p><form id="f">' +
+    '<label class="f" for="qq">Pregunta</label><input type="text" id="qq" autocomplete="off">' +
+    '<label class="f" for="qa">Respuesta correcta</label><input type="text" id="qa" autocomplete="off">' +
+    '<label class="f">Tres respuestas incorrectas</label><input type="text" id="qw1" placeholder="Incorrecta 1" autocomplete="off"><div class="mrow"><input type="text" id="qw2" placeholder="Incorrecta 2" autocomplete="off"></div><div class="mrow"><input type="text" id="qw3" placeholder="Incorrecta 3" autocomplete="off"></div>' +
+    '<div class="acts"><button class="btn" type="button" data-act="close">Cancelar</button><button class="btn primary" type="submit">Guardar</button></div></form>',
+    d2 => {
+      $("#f", d2).addEventListener("submit", ev => {
+        ev.preventDefault();
+        const q = $("#qq", d2).value.trim(), a = $("#qa", d2).value.trim(), w = ["#qw1", "#qw2", "#qw3"].map(s => $(s, d2).value.trim());
+        if (!q || !a || w.some(x => !x)) return toast("Completá la pregunta y las cuatro respuestas");
+        put("questions", { id: uid(), q, a, w }); closeDlg(); toast("Pregunta agregada");
+      });
+      $("#qq", d2).focus();
+    });
+}
+/* ---------- frases ---------- */
+let PC = "Todo", PQ = "";
+const canSpeak = () => "speechSynthesis" in window && typeof SpeechSynthesisUtterance !== "undefined";
+function say(txt) {
+  if (!canSpeak()) return toast("Este navegador no reproduce audio");
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(txt); u.lang = "pt-BR"; u.rate = 0.85;
+    const v = speechSynthesis.getVoices().find(x => /^pt[-_]BR/i.test(x.lang)); if (v) u.voice = v;
+    speechSynthesis.speak(u);
+  } catch (e) { toast("No se pudo reproducir el audio"); }
+}
+function phraseList() {
+  const q = norm(PQ);
+  const rows = PHR.filter(p => (PC === "Todo" || p[0] === PC) && (!q || norm(p[1]).includes(q) || norm(p[2]).includes(q)));
+  let h = "";
+  if (PC === "Emergencias") h += '<div class="sos" style="margin-bottom:8px"><div><b>190</b><span class="small muted">Policía</span></div><div><b>192</b><span class="small muted">Ambulancia</span></div><div><b>193</b><span class="small muted">Bomberos</span></div></div>';
+  if (!rows.length) return h + '<div class="empty">No hay frases para esa búsqueda.</div>';
+  rows.forEach(p => {
+    h += '<div class="ph"><div><div class="es">' + esc(p[1]) + '</div><div class="pt">' + esc(p[2]) + '</div><div class="pr">Se dice: ' + esc(p[3]) + "</div></div>" +
+      (canSpeak() ? '<button class="btn sm" type="button" data-act="say" data-t="' + esc(p[2]) + '" aria-label="Escuchar: ' + esc(p[2]) + '">Escuchar</button>' : "") + "</div>";
+  });
+  return h;
+}
+function vFrases() {
+  let h = '<section class="card"><h2>Portugués para el viaje</h2><label class="f" for="pq" style="margin-top:0">Buscar</label><input type="text" id="pq" value="' + esc(PQ) + '" placeholder="Ej: cuenta, baño, taxi" autocomplete="off">' +
+    '<div class="chips" style="margin-top:10px">' + PCATS.map(c => '<button type="button" class="chip" data-act="pcat" data-c="' + c + '" aria-pressed="' + (c === PC) + '">' + c + "</button>").join("") + '</div><div id="plist" style="margin-top:6px">' + phraseList() + "</div></section>";
+  h += '<section class="card"><h2>Palabras que engañan</h2><p class="small muted" style="margin:0 0 6px">Se parecen al español, pero significan otra cosa.</p>';
+  FALSOS.forEach(f => { h += '<div class="rank"><b>' + esc(f[0]) + '</b><span class="small muted" style="text-align:right;max-width:62%">' + esc(f[1]) + "</span></div>"; });
+  return h + "</section>";
+}
+
+/* ---------- ajustes ---------- */
+let SETUP = { mem: [] };
+function paintMembers() {
+  $("#mlist").innerHTML = SETUP.mem.map(x => '<div class="mrow"><input type="text" data-mid="' + esc(x.id) + '" value="' + esc(x.name) + '" placeholder="Nombre" aria-label="Nombre" autocomplete="off"><button class="btn sm" type="button" data-act="rmmember" data-id="' + esc(x.id) + '">Quitar</button></div>').join("");
+}
+function openSetup(fromExample) {
+  const ready = S.meta.ready, m = ready ? S.meta : blankMeta();
+  SETUP.mem = (ready ? m.members : ["Tomás", "Gero", "Nacho"].map(n => ({ id: uid(), name: n }))).map(x => ({ id: x.id, name: x.name }));
+  while (!ready && SETUP.mem.length < 4) SETUP.mem.push({ id: uid(), name: "" });
+  const note = db ? "Los datos se comparten en vivo con quienes estén en el grupo." : "Los datos quedan en este celular. Para compartir, usá el resumen de gastos o el respaldo.";
+  openDlg('<h2>' + (ready ? "Ajustes del viaje" : "Armá tu viaje") + '</h2><p class="small muted" style="margin:0">' + (fromExample ? "Esto es un ejemplo. Cargá tus datos para empezar. " : "") + note + '</p><form id="f">' +
+    '<label class="f" for="sd">Destino</label><input type="text" id="sd" value="' + esc(m.dest) + '" placeholder="Ej: Florianópolis" autocomplete="off">' +
+    '<div class="row"><div class="grow"><label class="f" for="ss">Salida</label><input type="date" id="ss" value="' + esc(m.start) + '"></div><div class="grow"><label class="f" for="se">Vuelta</label><input type="date" id="se" value="' + esc(m.end) + '"></div></div>' +
+    '<label class="f">Quiénes van</label><div id="mlist"></div><div class="mrow"><button class="btn sm" type="button" data-act="addmember">+ Agregar persona</button></div>' +
+    '<label class="f" for="sb">Mostrar los saldos en</label><select id="sb">' + CURS.map(c => '<option value="' + c + '"' + (c === m.base ? " selected" : "") + ">" + SYM[c] + " " + { BRL: "reales", ARS: "pesos", USD: "dólares" }[c] + "</option>").join("") + "</select>" +
+    '<label class="f">Cotización (cuántos pesos vale cada uno)</label><div class="row"><div class="grow"><label class="small muted" for="sr1">1 R$ =</label><input type="number" id="sr1" inputmode="decimal" step="any" min="0" value="' + esc(m.rates.BRL) + '"></div>' +
+    '<div class="grow"><label class="small muted" for="sr2">1 US$ =</label><input type="number" id="sr2" inputmode="decimal" step="any" min="0" value="' + esc(m.rates.USD) + '"></div></div>' +
+    '<p class="small muted" style="margin:6px 0 0">' + (m.ratesSet ? "" : "Los valores que ves son de ejemplo. ") + "Esta es la cotización general. En cada gasto pagado con Pix o tarjeta podés cargar los pesos que te debitaron y esa cuenta usa el valor exacto.</p>" +
+    syncSection() + (!db && ready ? '<div class="eyebrow" style="margin:18px 0 6px">Respaldo</div><div class="row"><button class="btn sm" type="button" data-act="copybk">Copiar respaldo</button></div><textarea id="bk" placeholder="Para restaurar, pegá acá un respaldo" style="margin-top:8px"></textarea><div class="row" style="margin-top:8px"><button class="btn sm" type="button" data-act="restore">Restaurar respaldo</button></div>' : "") +
+    '<div class="acts"><button class="btn" type="button" data-act="close">Cancelar</button><button class="btn primary" type="submit">Guardar</button></div></form>',
+    d2 => {
+      paintMembers();
+      $("#f", d2).addEventListener("submit", ev => {
+        ev.preventDefault();
+        const mem = SETUP.mem.filter(x => x.name.trim()).map(x => ({ id: x.id, name: x.name.trim() }));
+        const r1 = parseFloat($("#sr1", d2).value), r2 = parseFloat($("#sr2", d2).value);
+        if (mem.length < 2) return toast("Cargá al menos dos personas");
+        if (!(r1 > 0) || !(r2 > 0)) return toast("Las cotizaciones tienen que ser mayores a cero");
+        const s = $("#ss", d2).value, e2 = $("#se", d2).value;
+        if (s && e2 && e2 < s) return toast("La vuelta no puede ser antes de la salida");
+        setMeta({ ready: true, dest: $("#sd", d2).value.trim(), start: s, end: e2, base: $("#sb", d2).value, rates: { BRL: r1, USD: r2 }, ratesSet: true, members: mem });
+        closeDlg(); toast("Viaje guardado");
+      });
+    });
+}
+
+/* ---------- render ---------- */
+const TABS = [
+  ["gastos", "Gastos", '<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/>'],
+  ["plan", "Plan", '<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>'],
+  ["juego", "Juego", '<rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="15" cy="15" r="1"/>'],
+  ["frases", "Frases", '<path d="M4 5h16v11H9l-5 4z"/>']
+];
+const dayLabel = iso => { try { return dateOf(iso).toLocaleDateString("es-AR", { day: "numeric", month: "short" }).replace(".", ""); } catch (e) { return iso; } };
+function render() {
+  const m = D().meta;
+  $("#tripLine").textContent = (m.dest || "Tu viaje a Brasil") + (m.start ? " · " + dayLabel(m.start) + (m.end ? " al " + dayLabel(m.end) : "") : "");
+  $("#tabs").innerHTML = TABS.map(t => '<button type="button" data-act="tab" data-t="' + t[0] + '"' + (t[0] === tab ? ' aria-current="page"' : "") + '><svg viewBox="0 0 24 24" aria-hidden="true">' + t[2] + "</svg>" + t[1] + "</button>").join("");
+  const banner = isEx() && !loading ? '<div class="banner"><div><b>Esto es un ejemplo.</b> Armá tu viaje para cargar tus propios gastos y planes.</div><button class="btn" type="button" data-act="settings">Armar mi viaje</button></div>' : "";
+  $("#panel").innerHTML = banner + { gastos: vGastos, plan: vPlan, juego: vJuego, frases: vFrases }[tab]();
+  const fab = $("#fab");
+  fab.hidden = !(tab === "gastos" || tab === "plan");
+  fab.dataset.act = tab === "gastos" ? "addexp" : "additem"; fab.dataset.date = "";
+  fab.textContent = tab === "gastos" ? "Agregar gasto" : "Agregar plan";
+  paintSync();
+}
+
+/* ---------- acciones ---------- */
+const needSetup = () => { openSetup(true); };
+const ACT = {
+  close: () => closeDlg(),
+  tab: b => { tab = b.dataset.t; window.scrollTo(0, 0); render(); },
+  settings: (b, e) => { e.preventDefault(); openSetup(isEx()); },
+  addexp: () => (isEx() ? needSetup() : expForm()),
+  editexp: b => (isEx() ? needSetup() : expForm(b.dataset.id)),
+  delexp: b => { del("expenses", b.dataset.id); closeDlg(); toast("Gasto eliminado"); },
+  copysum: () => copyText(summaryText(), "Resumen copiado"),
+  additem: b => (isEx() ? needSetup() : itemForm(null, b.dataset.date)),
+  edititem: b => (isEx() ? needSetup() : itemForm(b.dataset.id)),
+  delitem: b => { del("items", b.dataset.id); closeDlg(); toast("Plan eliminado"); },
+  gmode: b => { G.mode = b.dataset.m; render(); },
+  rstart: () => roscoBegin(),
+  rpass: () => roscoAnswer(""),
+  rend: () => roscoFinish(),
+  rclose: () => { if (G.rosco) clearInterval(G.rosco.timer); G.rosco = null; render(); },
+  tstart: () => triviaBegin(),
+  tpick: b => { const T = G.trivia; if (T.picked !== null) return; T.picked = +b.dataset.i; if (T.picked === T.qs[T.i].ai) T.pts++; render(); },
+  tnext: () => { const T = G.trivia; T.picked = null; T.i++; if (T.i >= T.qs.length) { T.done = true; saveScore("trivia", T.pts, T.qs.length); } render(); },
+  tclose: () => { G.trivia = null; render(); },
+  addq: () => (isEx() ? needSetup() : qForm()),
+  delq: b => { del("questions", b.dataset.id); toast("Pregunta borrada"); },
+  pcat: b => { PC = b.dataset.c; render(); },
+  say: b => say(b.dataset.t),
+  addmember: () => { SETUP.mem.push({ id: uid(), name: "" }); paintMembers(); const i = document.querySelectorAll("#mlist input"); if (i.length) i[i.length - 1].focus(); },
+  rmmember: b => {
+    const id = b.dataset.id, used = S.expenses.some(e => e.payer === id || (e.split || []).includes(id));
+    if (used) return toast("Esa persona tiene gastos cargados y no se puede quitar");
+    SETUP.mem = SETUP.mem.filter(x => x.id !== id); paintMembers();
+  },
+  syncnew: async () => {
+    const code = genCode();
+    if (await connectSync(code, true)) { closeDlg(); copyText(syncLink(), "Grupo creado. Enlace copiado: mandáselo a los demás"); }
+  },
+  syncjoin: async () => {
+    const c = cleanCode($("#sj").value);
+    if (c.length < 10) return toast("Ese código es muy corto");
+    if (await connectSync(c, false)) { closeDlg(); toast("Conectado al grupo"); }
+  },
+  synccopy: () => copyText(syncLink(), "Enlace copiado"),
+  syncoff: () => { try { localStorage.removeItem(LSY); } catch (e) {} location.reload(); },
+  copybk: () => copyText(JSON.stringify(S), "Respaldo copiado"),
+  restore: () => {
+    try {
+      const p = JSON.parse($("#bk").value);
+      if (!p || !p.meta || !Array.isArray(p.expenses)) throw 0;
+      S = Object.assign(blank(), p, { meta: Object.assign(blankMeta(), p.meta) }); saveLocal(); closeDlg(); render(); toast("Respaldo restaurado");
+    } catch (e) { toast("Ese texto no es un respaldo válido"); }
+  }
+};
+document.addEventListener("click", e => { const b = e.target.closest("[data-act]"); if (b && ACT[b.dataset.act]) ACT[b.dataset.act](b, e); });
+document.addEventListener("change", e => { const t = e.target; if (t.dataset && t.dataset.chg === "gplayer") G.player = t.value; });
+document.addEventListener("input", e => {
+  const t = e.target;
+  if (t.id === "pq") { PQ = t.value; $("#plist").innerHTML = phraseList(); }
+  else if (t.dataset && t.dataset.mid) { const x = SETUP.mem.find(y => y.id === t.dataset.mid); if (x) x.name = t.value; }
+});
+document.addEventListener("submit", e => { if (e.target.id === "rf") { e.preventDefault(); roscoAnswer($("#ra").value); } });
+$("#btnSet").addEventListener("click", () => openSetup(isEx()));
+
+/* ---------- sincronización (Firestore) ---------- */
+const LSY = "viajecinho-sync";
+const SYNC = { code: "" };
+const cleanCode = c => String(c || "").toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+const genCode = () => "rio-" + Array.from(crypto.getRandomValues(new Uint8Array(12)), b => "abcdefghjkmnpqrstuvwxyz23456789"[b % 31]).join("");
+const syncLink = () => location.origin + location.pathname + "#g=" + SYNC.code;
+let FSL = null;
+async function loadFirebase() {
+  if (FSL) return FSL;
+  const base = "https://www.gstatic.com/firebasejs/10.12.2/";
+  const [app, fs] = await Promise.all([import(base + "firebase-app.js"), import(base + "firebase-firestore.js")]);
+  const a = app.initializeApp(FIREBASE_CONFIG);
+  let dbi;
+  try { dbi = fs.initializeFirestore(a, { localCache: fs.persistentLocalCache({ tabManager: fs.persistentMultipleTabManager() }) }); }
+  catch (e) { dbi = fs.getFirestore(a); }
+  FSL = { fs, dbi };
+  return FSL;
+}
+function fsAdapter(fs, dbi, code) {
+  const dref = p => fs.doc(dbi, "trips", code, ...p.split("/"));
+  const cref = c => fs.collection(dbi, "trips", code, c);
+  const sd = s => ({ exists: s.exists(), data: () => s.data(), metadata: s.metadata });
+  return {
+    doc: p => ({
+      set: o => fs.setDoc(dref(p), o),
+      get: () => fs.getDoc(dref(p)).then(sd),
+      onSnapshot: (n, e) => fs.onSnapshot(dref(p), s => n(sd(s)), e)
+    }),
+    collection: c => ({
+      doc: id => ({ set: o => fs.setDoc(fs.doc(cref(c), id), o), delete: () => fs.deleteDoc(fs.doc(cref(c), id)) }),
+      onSnapshot: (n, e) => fs.onSnapshot(cref(c), s => n({ docs: s.docs.map(d => ({ data: () => d.data() })), metadata: s.metadata }), e)
+    })
+  };
+}
+async function migrateLocal(h, local) {
+  if (!local.meta || !local.meta.ready) return;
+  try { const m = await h.doc("meta/main").get(); if (m.exists) return; } catch (e) { return; }
+  const ps = [h.doc("meta/main").set(local.meta)];
+  ["expenses", "items", "scores", "questions"].forEach(c => (local[c] || []).forEach(o => ps.push(h.collection(c).doc(o.id).set(o))));
+  await Promise.race([Promise.allSettled(ps), new Promise(r => setTimeout(r, 8000))]);
+}
+async function connectSync(code, migrate) {
+  try {
+    const local = JSON.parse(JSON.stringify(S));
+    const { fs, dbi } = await loadFirebase();
+    const h = fsAdapter(fs, dbi, code);
+    if (migrate) await migrateLocal(h, local);
+    SYNC.code = code;
+    try { localStorage.setItem(LSY, JSON.stringify({ code })); } catch (e) {}
+    attachDb(h);
+    return true;
+  } catch (e) { toast("No se pudo conectar con Firebase. Revisá la configuración y la conexión."); return false; }
+}
+function syncSection() {
+  const h = '<div class="eyebrow" style="margin:18px 0 6px">Sincronizar con el grupo</div>';
+  if (!FIREBASE_CONFIG) return h + '<p class="small muted" style="margin:0">Para que todos vean lo mismo hay que conectar Firebase (gratis). Falta pegar la configuración en el archivo; los pasos están en el README.</p>';
+  if (SYNC.code) return h + '<p class="small muted" style="margin:0 0 8px">Conectado al grupo ····' + esc(SYNC.code.slice(-4)) + '. Lo que cargues lo ven los demás en vivo.</p><div class="row"><button class="btn sm" type="button" data-act="synccopy">Copiar enlace para el grupo</button><button class="btn sm danger" type="button" data-act="syncoff">Desconectar</button></div>';
+  return h + '<p class="small muted" style="margin:0 0 8px">Creá un grupo y mandá el enlace a los demás, o unite con un código.</p><div class="row"><button class="btn sm" type="button" data-act="syncnew">Crear grupo</button></div><div class="mrow"><input type="text" id="sj" placeholder="Código del grupo" autocomplete="off" aria-label="Código del grupo"><button class="btn sm" type="button" data-act="syncjoin">Unirme</button></div>';
+}
+
+/* ---------- arranque ---------- */
+try {
+  const m = (location.hash || "").match(/^#g=([A-Za-z0-9-]+)/);
+  if (m) { localStorage.setItem(LSY, JSON.stringify({ code: cleanCode(m[1]) })); history.replaceState(null, "", location.pathname + location.search); }
+} catch (e) {}
+render();
+try {
+  const st = JSON.parse(localStorage.getItem(LSY) || "null");
+  if (st && st.code && FIREBASE_CONFIG) connectSync(cleanCode(st.code), false);
+} catch (e) {}
+</script>
+
+</body>
+</html>
