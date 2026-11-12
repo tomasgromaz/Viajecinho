@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#F2F5F6" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0B1620" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F3F6EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#07150D" media="(prefers-color-scheme: dark)">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="description" content="Gastos compartidos, plan por día, rosco y trivia, y frasario en portugués para el viaje a Brasil.">
@@ -18,8 +18,8 @@
 <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
 <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js">
 <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&family=Inter:wght@400;500;600&display=swap"></noscript>
 <style>
 /* reset propio */
 :root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -28,19 +28,19 @@ img{max-width:100%}
 [hidden]{display:none!important}
 /* Layout: columna única tipo app, cabecera con la onda del calçadão, navegación fija abajo. */
 :root{
-  --bg:#F2F5F6; --surface:#FFFFFF; --surface2:#E8EEF0; --ink:#0E1F2B; --muted:#56697A; --line:#D5DEE3;
-  --accent:#14508C; --accent-ink:#FFFFFF; --sun:#F2B800; --sun-ink:#2A2000;
-  --good:#1B7F4B; --bad:#B83A2E; --shadow:0 1px 2px rgba(14,31,43,.08),0 6px 18px rgba(14,31,43,.06);
-  --f-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --bg:#F3F6EE; --surface:#FFFFFF; --surface2:#E5EDDB; --ink:#0D2418; --muted:#566A5B; --line:#D2DCC8;
+  --accent:#007A33; --accent-ink:#FFFFFF; --sun:#FFDF00; --sun-ink:#1B2A00; --blue:#002776;
+  --good:#17803A; --bad:#B83A2E; --shadow:0 1px 2px rgba(13,36,24,.08),0 6px 18px rgba(13,36,24,.06);
+  --f-display:"Londrina Solid","Trebuchet MS",system-ui,sans-serif;
   --f-body:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0B1620; --surface:#132230; --surface2:#1A2D3D; --ink:#E8EEF2; --muted:#93A5B3; --line:#25384A;
-  --accent:#6AAEF2; --accent-ink:#08213A; --sun:#F5C842; --sun-ink:#2A2000; --good:#4CC38A; --bad:#F28B7D;
+  --bg:#07150D; --surface:#0E2417; --surface2:#153222; --ink:#ECF5E6; --muted:#9DB5A2; --line:#24432F;
+  --accent:#3FD16E; --accent-ink:#04200E; --sun:#FFDF00; --sun-ink:#1B2A00; --blue:#9DBBFF; --good:#4CD27F; --bad:#F28B7D;
   --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3); color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0B1620; --surface:#132230; --surface2:#1A2D3D; --ink:#E8EEF2; --muted:#93A5B3; --line:#25384A;
-  --accent:#6AAEF2; --accent-ink:#08213A; --sun:#F5C842; --sun-ink:#2A2000; --good:#4CC38A; --bad:#F28B7D;
+  --bg:#07150D; --surface:#0E2417; --surface2:#153222; --ink:#ECF5E6; --muted:#9DB5A2; --line:#24432F;
+  --accent:#3FD16E; --accent-ink:#04200E; --sun:#FFDF00; --sun-ink:#1B2A00; --blue:#9DBBFF; --good:#4CD27F; --bad:#F28B7D;
   --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3); color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:400 15px/1.45 var(--f-body);
@@ -48,7 +48,7 @@ body{background:var(--bg);color:var(--ink);font:400 15px/1.45 var(--f-body);
   padding-block:0 96px;-webkit-text-size-adjust:100%}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
 .wrap{max-width:720px;margin:0 auto}
-h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1,h2,h3{font-family:var(--f-display);font-weight:900;margin:0;text-wrap:balance;letter-spacing:.015em}
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -63,14 +63,16 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .brand{min-width:0;display:flex;align-items:center;gap:10px}
 .brand .nm{min-width:0}
 .logo{width:42px;height:42px;flex:none;display:block}
-.brand h1{font-size:27px;font-weight:800;line-height:1}
+.brand h1{font-size:33px;font-weight:900;line-height:1;color:var(--blue)}
 .brand .trip{font-size:13px;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .top-actions{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none}
 .sync{font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:6px;cursor:pointer}
 .sync i{width:8px;height:8px;border-radius:50%;background:var(--muted);display:inline-block}
 .sync.live i{background:var(--good)}
-.wave{display:block;width:100%;height:14px;margin-top:10px}
-.wave path{fill:none;stroke:var(--ink);stroke-width:3;opacity:.85}
+.wave{display:block;width:100%;height:20px;margin-top:8px}
+.wave path{fill:none;stroke-width:3;stroke-linecap:round}
+.wave .w1{stroke:var(--accent)}
+.wave .w2{stroke:var(--sun)}
 
 /* controles */
 .btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 14px;font-weight:600;min-height:40px}
@@ -98,14 +100,14 @@ textarea{min-height:90px;resize:vertical}
 /* tarjetas */
 main{padding-top:16px;display:flex;flex-direction:column;gap:16px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
-.card h2{font-size:19px;margin-bottom:10px}
+.card h2{font-size:23px;margin-bottom:10px;color:var(--blue)}
 .banner{background:var(--sun);color:var(--sun-ink);border-radius:12px;padding:12px 14px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .banner b{font-family:var(--f-display)}
 .banner .btn{background:var(--sun-ink);color:var(--sun);border:0}
 .empty{text-align:center;padding:18px 8px;color:var(--muted)}
 
 /* gastos */
-.total{font-family:var(--f-display);font-weight:800;font-size:34px;line-height:1.05}
+.total{font-family:var(--f-display);font-weight:900;font-size:40px;line-height:1.05;letter-spacing:.01em}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:12px}
 .stat .v{font-weight:700;font-size:17px}
 .bal{display:grid;grid-template-columns:minmax(64px,90px) 1fr auto;gap:10px;align-items:center;padding:6px 0}
@@ -119,7 +121,7 @@ main{padding-top:16px;display:flex;flex-direction:column;gap:16px}
 .pay{display:flex;align-items:center;gap:8px;padding:9px 0;border-top:1px solid var(--line);flex-wrap:wrap}
 .pay:first-of-type{border-top:0}
 .pay .arrow{color:var(--muted)}
-.day-h{font-family:var(--f-display);font-weight:700;font-size:14px;color:var(--muted);margin:14px 0 4px;text-transform:capitalize}
+.day-h{font-family:var(--f-display);font-weight:400;font-size:17px;letter-spacing:.03em;color:var(--muted);margin:14px 0 4px;text-transform:capitalize}
 .exp{display:grid;grid-template-columns:1fr auto;gap:2px 12px;width:100%;text-align:left;background:transparent;border:0;border-top:1px solid var(--line);padding:11px 0}
 .exp:first-of-type{border-top:0}
 .exp .d{font-weight:600}
@@ -128,7 +130,7 @@ main{padding-top:16px;display:flex;flex-direction:column;gap:16px}
 
 /* plan */
 .count{display:flex;align-items:baseline;gap:10px}
-.count b{font-family:var(--f-display);font-size:40px;font-weight:800;line-height:1}
+.count b{font-family:var(--f-display);font-size:46px;font-weight:900;line-height:1}
 .day{border-left:3px solid var(--line);padding-left:14px;margin-left:4px}
 .day.today{border-left-color:var(--sun)}
 .day h3{font-size:16px;text-transform:capitalize;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
@@ -142,7 +144,7 @@ main{padding-top:16px;display:flex;flex-direction:column;gap:16px}
 .rl{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
 .rl.c{fill:var(--good);stroke:var(--good)} .rl.w{fill:var(--bad);stroke:var(--bad)}
 .rl.s{fill:var(--surface);stroke:var(--sun);stroke-width:3} .rl.cur{stroke:var(--accent);stroke-width:4}
-.rt{font:700 14px var(--f-display);fill:var(--ink);text-anchor:middle;dominant-baseline:central}
+.rt{font:400 17px var(--f-display);fill:var(--ink);text-anchor:middle;dominant-baseline:central}
 .rl.c+.rt,.rl.w+.rt{fill:#fff}
 .clue{font-size:17px;font-weight:500;margin:6px 0 10px}
 .opt{display:block;width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:12px 14px;margin-top:8px;font-weight:500}
@@ -154,12 +156,12 @@ main{padding-top:16px;display:flex;flex-direction:column;gap:16px}
 /* frases */
 .ph{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:12px 0;border-top:1px solid var(--line)}
 .ph:first-of-type{border-top:0}
-.ph .pt{font-family:var(--f-display);font-weight:700;font-size:19px}
+.ph .pt{font-family:var(--f-display);font-weight:400;font-size:23px;letter-spacing:.01em}
 .ph .es{color:var(--muted);font-size:13px}
 .ph .pr{font-size:13px;color:var(--accent);font-weight:500}
 .sos{display:flex;gap:10px;flex-wrap:wrap}
 .sos div{flex:1;min-width:92px;background:var(--surface2);border-radius:10px;padding:10px;text-align:center}
-.sos b{display:block;font-family:var(--f-display);font-size:24px}
+.sos b{display:block;font-family:var(--f-display);font-size:28px;font-weight:900}
 
 /* navegación */
 nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:25;background:var(--surface);border-top:1px solid var(--line);
@@ -167,7 +169,7 @@ nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:25;background:var(--surf
 nav.tabs .in{max-width:720px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
 nav.tabs button{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border-radius:10px;color:var(--muted);font-size:12px;font-weight:600}
 nav.tabs svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-nav.tabs button[aria-current="page"]{color:var(--accent);background:var(--surface2)}
+nav.tabs button[aria-current="page"]{color:var(--accent);background:var(--surface2);box-shadow:inset 0 -3px 0 var(--sun)}
 .fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:24;
   border-radius:999px;padding:12px 18px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
 
@@ -175,7 +177,7 @@ nav.tabs button[aria-current="page"]{color:var(--accent);background:var(--surfac
 dialog{border:0;border-radius:16px;padding:0;background:var(--surface);color:var(--ink);width:min(560px,calc(100vw - 24px));max-height:88vh;box-shadow:0 20px 60px rgba(0,0,0,.35)}
 dialog::backdrop{background:rgba(6,14,20,.55)}
 .dlg{padding:18px 18px 16px}
-.dlg h2{font-size:21px;margin-bottom:4px}
+.dlg h2{font-size:25px;margin-bottom:4px;color:var(--blue)}
 .dlg .acts{display:flex;gap:10px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap}
 .checks{display:flex;flex-wrap:wrap;gap:8px}
 .checks label{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;background:var(--surface)}
@@ -193,7 +195,7 @@ dialog::backdrop{background:rgba(6,14,20,.55)}
     <div class="brand"><svg class='logo' viewBox='0 0 100 100' aria-hidden='true'><rect width='100' height='100' rx='22' fill='#009C3B'/><path d='M50 15 L92 50 L50 85 L8 50Z' fill='#FFDF00'/><circle cx='50' cy='50' r='19' fill='#002776'/><circle cx='50' cy='40' r='2.8' fill='#fff'/><rect x='36' y='42.5' width='28' height='2' rx='1' fill='#fff'/><path d='M46.5 43 L53.5 43 L56.5 62 L43.5 62Z' fill='#fff'/></svg><div class="nm"><h1>Viajecinho</h1><div class="trip" id="tripLine"></div></div></div>
     <div class="top-actions"><button class="btn sm" id="btnSet" type="button">Ajustes</button><span class="sync" id="sync" data-act="syncnow" role="button" title="Tocá para actualizar"><i></i><span>Solo este celular</span></span></div>
   </div>
-  <svg class="wave" viewBox="0 0 400 14" preserveAspectRatio="none" aria-hidden="true"><defs><pattern id="wv" width="40" height="14" patternUnits="userSpaceOnUse"><path d="M0 7 Q10 0 20 7 T40 7"/></pattern></defs><rect width="400" height="14" fill="url(#wv)" style="stroke:none"/></svg>
+  <svg class="wave" viewBox="0 0 400 20" preserveAspectRatio="none" aria-hidden="true"><defs><pattern id="wv" width="40" height="20" patternUnits="userSpaceOnUse"><path class="w1" d="M0 5 Q10 -1 20 5 T40 5"/><path class="w2" d="M0 14 Q10 8 20 14 T40 14"/></pattern></defs><rect width="400" height="20" fill="url(#wv)" style="stroke:none"/></svg>
 </header>
 <main id="panel" aria-live="polite"></main>
 </div>
@@ -670,7 +672,7 @@ function roscoPlay() {
     svg += '<circle class="rl ' + (R.st[i] === "p" ? "" : R.st[i]) + (i === R.cur ? " cur" : "") + '" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="16"/><text class="rt" x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '">' + r.l + "</text>";
   });
   const ok = R.st.filter(s => s === "c").length;
-  svg += '<text id="rtime" x="170" y="160" text-anchor="middle" style="font:800 44px var(--f-display);fill:var(--ink)">' + R.t + '</text><text x="170" y="192" text-anchor="middle" style="font:600 14px var(--f-body);fill:var(--muted)">' + ok + " correctas</text></svg>";
+  svg += '<text id="rtime" x="170" y="160" text-anchor="middle" style="font:900 56px var(--f-display);fill:var(--ink)">' + R.t + '</text><text x="170" y="192" text-anchor="middle" style="font:600 14px var(--f-body);fill:var(--muted)">' + ok + " correctas</text></svg>";
   return '<section class="card">' + svg + '<div class="eyebrow" style="margin-top:8px">' + esc(q.k) + '</div><div class="clue">' + esc(q.q) + '</div>' +
     '<form id="rf" autocomplete="off"><input type="text" id="ra" placeholder="Tu respuesta" autocapitalize="none" autocorrect="off" spellcheck="false" aria-label="Tu respuesta">' +
     '<div class="row" style="margin-top:10px"><button class="btn primary grow" type="submit">Responder</button><button class="btn grow" type="button" data-act="rpass">Pasapalabra</button><button class="btn ghost" type="button" data-act="rend">Terminar</button></div></form></section>';
@@ -892,6 +894,8 @@ const ACT = {
     if (await connectSync(c, false)) { closeDlg(); toast("Conectado al grupo"); }
   },
   syncnow: () => { if (!SYNC.code) return; if (!db) return toast("Todavía conectando…"); if (syncState !== "live") { clearTimeout(retryT); retryT = null; attachDb(db, true); } kick(); toast("Actualizando…"); },
+  nojoin: () => { try { localStorage.setItem("viajecinho-nojoin", "1"); } catch (e) {} closeDlg(); },
+  reload: () => location.reload(),
   synccopy: () => copyText(syncLink(), "Enlace copiado"),
   syncoff: () => { try { localStorage.removeItem(LSY); localStorage.removeItem(LSC); } catch (e) {} try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {} location.reload(); },
   copybk: () => copyText(JSON.stringify(S), "Respaldo copiado"),
@@ -915,7 +919,7 @@ $("#btnSet").addEventListener("click", () => openSetup(isEx()));
 
 /* ---------- sincronización (Firestore) ---------- */
 const LSY = "viajecinho-sync";
-const SYNC = { code: "", err: "" };
+const SYNC = { code: "", err: "", mode: "" };
 const PENDING = [];
 const LSC = "viajecinho-cache";
 let cacheT;
@@ -930,7 +934,10 @@ async function loadFirebase() {
   const [app, fs] = await Promise.all([import(base + "firebase-app.js"), import(base + "firebase-firestore.js")]);
   const a = app.initializeApp(FIREBASE_CONFIG);
   let dbi;
-  try { dbi = fs.initializeFirestore(a, { experimentalAutoDetectLongPolling: true, localCache: fs.persistentLocalCache({ tabManager: fs.persistentMultipleTabManager() }) }); }
+  const ios = /iPad|iPhone|iPod/.test(navigator.userAgent || "") || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  SYNC.mode = ios ? "estable (iPhone)" : "automático";
+  const net = ios ? { experimentalForceLongPolling: true } : { experimentalAutoDetectLongPolling: true };
+  try { dbi = fs.initializeFirestore(a, { ...net, localCache: fs.persistentLocalCache({ tabManager: fs.persistentMultipleTabManager() }) }); }
   catch (e) { dbi = fs.getFirestore(a); }
   FSL = { fs, dbi };
   return FSL;
@@ -971,10 +978,12 @@ async function migrateLocal(h, local) {
   ["expenses", "items", "scores", "questions"].forEach(c => (local[c] || []).forEach(o => ps.push(h.collection(c).doc(o.id).set(o))));
   await Promise.race([Promise.allSettled(ps), new Promise(r => setTimeout(r, 8000))]);
 }
-async function connectSync(code, migrate, keep) {
+async function connectSync(code, migrate, keep, quiet) {
+  const wd = setTimeout(() => { if (!db) { SYNC.err = "firebase-no-carga"; syncState = "slow"; paintSync(); } }, 12000);
   try {
     const local = JSON.parse(JSON.stringify(S));
     const { fs, dbi } = await loadFirebase();
+    clearTimeout(wd);
     const h = fsAdapter(fs, dbi, code);
     if (migrate) await migrateLocal(h, local);
     SYNC.code = code;
@@ -982,14 +991,36 @@ async function connectSync(code, migrate, keep) {
     try { history.replaceState(null, "", location.pathname + location.search + "#g=" + code); } catch (e) {}
     attachDb(h, keep);
     return true;
-  } catch (e) { toast("No se pudo conectar con Firebase. Revisá la configuración y la conexión."); return false; }
+  } catch (e) {
+    clearTimeout(wd);
+    SYNC.err = String((e && (e.code || e.message)) || "error").slice(0, 60); syncState = "slow"; paintSync();
+    if (!quiet) toast("No se pudo conectar con Firebase. Revisá la configuración y la conexión.");
+    return false;
+  }
+}
+async function bootConnect(code, keep, n) {
+  const ok = await connectSync(code, false, keep, n > 0);
+  if (!ok && n < 6) setTimeout(() => bootConnect(code, keep, n + 1), 5000 * (n + 1));
 }
 function syncSection() {
   const h = '<div class="eyebrow" style="margin:18px 0 6px">Sincronizar con el grupo</div>';
   if (!FIREBASE_CONFIG) return h + '<p class="small muted" style="margin:0">Para que todos vean lo mismo hay que conectar Firebase (gratis). Falta pegar la configuración en el archivo; los pasos están en el README.</p>';
-  if (SYNC.code) return h + '<p class="small muted" style="margin:0 0 8px">Conectado al grupo ····' + esc(SYNC.code.slice(-4)) + '. Lo que cargues lo ven los demás en vivo.' + (SYNC.err ? ' <br>Último aviso de Firebase: <b>' + esc(SYNC.err) + '</b>' : '') + '</p><div class="row"><button class="btn sm" type="button" data-act="synccopy">Copiar enlace para el grupo</button><button class="btn sm danger" type="button" data-act="syncoff">Desconectar</button></div>';
+  if (SYNC.code) return h + '<p class="small muted" style="margin:0 0 8px">Conectado al grupo ····' + esc(SYNC.code.slice(-4)) + '. Lo que cargues lo ven los demás en vivo.' + (SYNC.err ? ' <br>Último aviso de Firebase: <b>' + esc(SYNC.err) + '</b>' : '') + '</p><div class="row"><button class="btn sm" type="button" data-act="synccopy">Copiar enlace para el grupo</button><button class="btn sm" type="button" data-act="reload">Recargar app</button><button class="btn sm danger" type="button" data-act="syncoff">Desconectar</button></div><p class="small muted" style="margin:8px 0 0">Conexión: ' + esc(SYNC.mode || "—") + (navigator.standalone ? " · app instalada" : "") + '</p>';
   return h + '<p class="small muted" style="margin:0 0 8px">Creá un grupo y mandá el enlace a los demás, o pegá acá el enlace o el código de tu grupo. Si abriste la app desde el ícono de inicio del iPhone, hacelo una vez acá: esa app guarda sus datos aparte de Safari.</p><div class="row"><button class="btn sm" type="button" data-act="syncnew">Crear grupo</button></div><div class="mrow"><input type="text" id="sj" placeholder="Enlace o código del grupo" autocomplete="off" autocapitalize="off" aria-label="Enlace o código del grupo"><button class="btn sm" type="button" data-act="syncjoin">Unirme</button></div>';
 }
+
+/* ---------- errores visibles ---------- */
+window.addEventListener("error", e => {
+  const m = String((e && e.message) || "error");
+  if (/ResizeObserver|Script error/i.test(m) || document.getElementById("fatal")) return;
+  const d = document.createElement("div");
+  d.id = "fatal";
+  d.style.cssText = "position:fixed;left:8px;right:8px;bottom:8px;z-index:99;background:#7a1f1f;color:#fff;padding:10px 12px;border-radius:12px;font:13px/1.35 system-ui,sans-serif;display:flex;gap:10px;align-items:center";
+  d.innerHTML = '<span style="flex:1;min-width:0;word-break:break-word"></span><button type="button" style="border:0;border-radius:8px;padding:6px 10px;font:inherit">Recargar</button>';
+  d.firstChild.textContent = "Error: " + m.slice(0, 120);
+  d.lastChild.addEventListener("click", () => location.reload());
+  document.body.appendChild(d);
+});
 
 /* ---------- arranque ---------- */
 let hashCode = "";
@@ -1006,7 +1037,12 @@ if (bootCode) {
   } catch (e) {}
 }
 render();
-if (bootCode) connectSync(bootCode, false, warm);
+if (bootCode) bootConnect(bootCode, warm, 0);
+else if (FIREBASE_CONFIG && navigator.standalone) {
+  /* La app del ícono de inicio guarda sus datos aparte de Safari: pide el grupo una sola vez */
+  let skip = false; try { skip = localStorage.getItem("viajecinho-nojoin") === "1"; } catch (e) {}
+  if (!skip) openDlg('<h2>Unirte al grupo</h2><p class="small muted" style="margin:0 0 10px">Esta app guarda sus datos aparte de Safari. Pegá el enlace del grupo (o el código) una sola vez para ver el viaje.</p><div class="mrow"><input type="text" id="sj" placeholder="Enlace o código del grupo" autocomplete="off" autocapitalize="off" aria-label="Enlace o código del grupo"><button class="btn sm" type="button" data-act="syncjoin">Unirme</button></div><div class="acts"><button class="btn" data-act="nojoin" type="button">Ahora no</button></div>');
+}
 </script>
 
 </body>
