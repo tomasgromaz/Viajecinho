@@ -861,13 +861,15 @@ const ACT = {
     if (await connectSync(code, true)) { closeDlg(); copyText(syncLink(), "Grupo creado. Enlace copiado: mandáselo a los demás"); }
   },
   syncjoin: async () => {
-    const c = cleanCode($("#sj").value);
-    if (c.length < 10) return toast("Ese código es muy corto");
+    const raw = $("#sj").value.trim();
+    const m = raw.match(/[#?&]g=([A-Za-z0-9-]+)/);
+    const c = cleanCode(m ? m[1] : (/^[A-Za-z0-9-]+$/.test(raw) ? raw : ""));
+    if (c.length < 10) return toast("No encontré un código. Pegá el enlace completo o el código");
     if (await connectSync(c, false)) { closeDlg(); toast("Conectado al grupo"); }
   },
   syncnow: () => { if (!SYNC.code) return; if (kick()) toast("Actualizando…"); else toast("Todavía conectando…"); },
   synccopy: () => copyText(syncLink(), "Enlace copiado"),
-  syncoff: () => { try { localStorage.removeItem(LSY); } catch (e) {} location.reload(); },
+  syncoff: () => { try { localStorage.removeItem(LSY); localStorage.removeItem(LSC); } catch (e) {} try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {} location.reload(); },
   copybk: () => copyText(JSON.stringify(S), "Respaldo copiado"),
   restore: () => {
     try {
@@ -953,6 +955,7 @@ async function connectSync(code, migrate, keep) {
     if (migrate) await migrateLocal(h, local);
     SYNC.code = code;
     try { localStorage.setItem(LSY, JSON.stringify({ code })); } catch (e) {}
+    try { history.replaceState(null, "", location.pathname + location.search + "#g=" + code); } catch (e) {}
     attachDb(h, keep);
     return true;
   } catch (e) { toast("No se pudo conectar con Firebase. Revisá la configuración y la conexión."); return false; }
@@ -961,16 +964,16 @@ function syncSection() {
   const h = '<div class="eyebrow" style="margin:18px 0 6px">Sincronizar con el grupo</div>';
   if (!FIREBASE_CONFIG) return h + '<p class="small muted" style="margin:0">Para que todos vean lo mismo hay que conectar Firebase (gratis). Falta pegar la configuración en el archivo; los pasos están en el README.</p>';
   if (SYNC.code) return h + '<p class="small muted" style="margin:0 0 8px">Conectado al grupo ····' + esc(SYNC.code.slice(-4)) + '. Lo que cargues lo ven los demás en vivo.</p><div class="row"><button class="btn sm" type="button" data-act="synccopy">Copiar enlace para el grupo</button><button class="btn sm danger" type="button" data-act="syncoff">Desconectar</button></div>';
-  return h + '<p class="small muted" style="margin:0 0 8px">Creá un grupo y mandá el enlace a los demás, o unite con un código.</p><div class="row"><button class="btn sm" type="button" data-act="syncnew">Crear grupo</button></div><div class="mrow"><input type="text" id="sj" placeholder="Código del grupo" autocomplete="off" aria-label="Código del grupo"><button class="btn sm" type="button" data-act="syncjoin">Unirme</button></div>';
+  return h + '<p class="small muted" style="margin:0 0 8px">Creá un grupo y mandá el enlace a los demás, o pegá acá el enlace o el código de tu grupo. Si abriste la app desde el ícono de inicio del iPhone, hacelo una vez acá: esa app guarda sus datos aparte de Safari.</p><div class="row"><button class="btn sm" type="button" data-act="syncnew">Crear grupo</button></div><div class="mrow"><input type="text" id="sj" placeholder="Enlace o código del grupo" autocomplete="off" autocapitalize="off" aria-label="Enlace o código del grupo"><button class="btn sm" type="button" data-act="syncjoin">Unirme</button></div>';
 }
 
 /* ---------- arranque ---------- */
-try {
-  const m = (location.hash || "").match(/^#g=([A-Za-z0-9-]+)/);
-  if (m) { localStorage.setItem(LSY, JSON.stringify({ code: cleanCode(m[1]) })); history.replaceState(null, "", location.pathname + location.search); }
-} catch (e) {}
+let hashCode = "";
+try { const m = (location.hash || "").match(/^#g=([A-Za-z0-9-]+)/); if (m) hashCode = cleanCode(m[1]); } catch (e) {}
+try { if (hashCode) localStorage.setItem(LSY, JSON.stringify({ code: hashCode })); } catch (e) {}
 let bootCode = "", warm = false;
 try { const st = JSON.parse(localStorage.getItem(LSY) || "null"); if (st && st.code && FIREBASE_CONFIG) bootCode = cleanCode(st.code); } catch (e) {}
+if (hashCode && FIREBASE_CONFIG) bootCode = hashCode;
 if (bootCode) {
   SYNC.code = bootCode; syncState = "connecting";
   try {
