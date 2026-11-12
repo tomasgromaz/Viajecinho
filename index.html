@@ -387,18 +387,42 @@ function setMeta(m) {
   render();
 }
 
+const UNSUB = [];
+let retryT = null, retries = 0;
 function attachDb(handle, keep) {
   db = handle; loading = true; syncState = "connecting"; if (!keep) S = blank(); paintSync();
-  const timer = setTimeout(() => { if (loading) { loading = false; syncState = "slow"; paintSync(); } }, 10000);
-  const done = snap => { if (!snap.metadata.fromCache) { loading = false; clearTimeout(timer); if (syncState !== "live") { syncState = "live"; paintSync(); } } };
-  const bad = () => { syncState = "slow"; paintSync(); };
-  db.doc("meta/main").onSnapshot(s => {
-    S.meta = s.exists ? Object.assign(blankMeta(), s.data()) : blankMeta();
-    done(s); remoteRender("meta");
-  }, bad);
-  ["expenses", "items", "scores", "questions"].forEach(c => db.collection(c).onSnapshot(s => {
-    S[c] = s.docs.map(d => d.data()); done(s); remoteRender(c);
-  }, bad));
+  UNSUB.splice(0).forEach(f => { try { f(); } catch (e) {} });
+  const ok = {}, sig = {};
+  let timer = null, failed = false;
+  const arm = () => { clearTimeout(timer); timer = setTimeout(() => { if (syncState !== "live") { loading = false; syncState = "slow"; paintSync(); } }, 10000); };
+  arm();
+  /* "en vivo" = Firestore confirmó que está al día con el servidor (fromCache = false). Se pide includeMetadataChanges
+     porque, si no hubo cambios, Firestore no avisa esa confirmación y la app quedaba en "Sin conexión" aunque todo andaba. */
+  const done = (name, snap) => {
+    ok[name] = !snap.metadata.fromCache;
+    if (failed) return;
+    if (Object.values(ok).some(Boolean)) {
+      loading = false; clearTimeout(timer); retries = 0; SYNC.err = "";
+      if (syncState !== "live") { syncState = "live"; paintSync(); }
+    } else if (syncState === "live") { syncState = "connecting"; paintSync(); arm(); }
+  };
+  const bad = e => {
+    failed = true;
+    SYNC.err = (e && e.code) || "error";
+    syncState = "slow"; paintSync();
+    if (retryT) return;
+    retryT = setTimeout(() => { retryT = null; retries++; if (db === handle) attachDb(handle, true); }, Math.min(30000, 3000 * Math.pow(2, Math.min(retries, 4))));
+  };
+  const take = (name, data, snap) => {
+    done(name, snap);
+    const g = JSON.stringify(data);
+    if (sig[name] === g) return;
+    sig[name] = g;
+    if (name === "meta") S.meta = data; else S[name] = data;
+    remoteRender(name);
+  };
+  UNSUB.push(db.doc("meta/main").onSnapshot(s => take("meta", s.exists ? Object.assign(blankMeta(), s.data()) : blankMeta(), s), bad));
+  ["expenses", "items", "scores", "questions"].forEach(c => UNSUB.push(db.collection(c).onSnapshot(s => take(c, s.docs.map(d => d.data()), s), bad)));
   PENDING.splice(0).forEach(f => f());
 }
 function remoteRender(c) {
@@ -867,7 +891,7 @@ const ACT = {
     if (c.length < 10) return toast("No encontré un código. Pegá el enlace completo o el código");
     if (await connectSync(c, false)) { closeDlg(); toast("Conectado al grupo"); }
   },
-  syncnow: () => { if (!SYNC.code) return; if (kick()) toast("Actualizando…"); else toast("Todavía conectando…"); },
+  syncnow: () => { if (!SYNC.code) return; if (!db) return toast("Todavía conectando…"); if (syncState !== "live") { clearTimeout(retryT); retryT = null; attachDb(db, true); } kick(); toast("Actualizando…"); },
   synccopy: () => copyText(syncLink(), "Enlace copiado"),
   syncoff: () => { try { localStorage.removeItem(LSY); localStorage.removeItem(LSC); } catch (e) {} try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {} location.reload(); },
   copybk: () => copyText(JSON.stringify(S), "Respaldo copiado"),
@@ -891,7 +915,7 @@ $("#btnSet").addEventListener("click", () => openSetup(isEx()));
 
 /* ---------- sincronización (Firestore) ---------- */
 const LSY = "viajecinho-sync";
-const SYNC = { code: "" };
+const SYNC = { code: "", err: "" };
 const PENDING = [];
 const LSC = "viajecinho-cache";
 let cacheT;
@@ -919,11 +943,11 @@ function fsAdapter(fs, dbi, code) {
     doc: p => ({
       set: o => fs.setDoc(dref(p), o),
       get: () => fs.getDoc(dref(p)).then(sd),
-      onSnapshot: (n, e) => fs.onSnapshot(dref(p), s => n(sd(s)), e)
+      onSnapshot: (n, e) => fs.onSnapshot(dref(p), { includeMetadataChanges: true }, s => n(sd(s)), e)
     }),
     collection: c => ({
       doc: id => ({ set: o => fs.setDoc(fs.doc(cref(c), id), o), delete: () => fs.deleteDoc(fs.doc(cref(c), id)) }),
-      onSnapshot: (n, e) => fs.onSnapshot(cref(c), s => n({ docs: s.docs.map(d => ({ data: () => d.data() })), metadata: s.metadata }), e)
+      onSnapshot: (n, e) => fs.onSnapshot(cref(c), { includeMetadataChanges: true }, s => n({ docs: s.docs.map(d => ({ data: () => d.data() })), metadata: s.metadata }), e)
     })
   };
 }
@@ -963,7 +987,7 @@ async function connectSync(code, migrate, keep) {
 function syncSection() {
   const h = '<div class="eyebrow" style="margin:18px 0 6px">Sincronizar con el grupo</div>';
   if (!FIREBASE_CONFIG) return h + '<p class="small muted" style="margin:0">Para que todos vean lo mismo hay que conectar Firebase (gratis). Falta pegar la configuración en el archivo; los pasos están en el README.</p>';
-  if (SYNC.code) return h + '<p class="small muted" style="margin:0 0 8px">Conectado al grupo ····' + esc(SYNC.code.slice(-4)) + '. Lo que cargues lo ven los demás en vivo.</p><div class="row"><button class="btn sm" type="button" data-act="synccopy">Copiar enlace para el grupo</button><button class="btn sm danger" type="button" data-act="syncoff">Desconectar</button></div>';
+  if (SYNC.code) return h + '<p class="small muted" style="margin:0 0 8px">Conectado al grupo ····' + esc(SYNC.code.slice(-4)) + '. Lo que cargues lo ven los demás en vivo.' + (SYNC.err ? ' <br>Último aviso de Firebase: <b>' + esc(SYNC.err) + '</b>' : '') + '</p><div class="row"><button class="btn sm" type="button" data-act="synccopy">Copiar enlace para el grupo</button><button class="btn sm danger" type="button" data-act="syncoff">Desconectar</button></div>';
   return h + '<p class="small muted" style="margin:0 0 8px">Creá un grupo y mandá el enlace a los demás, o pegá acá el enlace o el código de tu grupo. Si abriste la app desde el ícono de inicio del iPhone, hacelo una vez acá: esa app guarda sus datos aparte de Safari.</p><div class="row"><button class="btn sm" type="button" data-act="syncnew">Crear grupo</button></div><div class="mrow"><input type="text" id="sj" placeholder="Enlace o código del grupo" autocomplete="off" autocapitalize="off" aria-label="Enlace o código del grupo"><button class="btn sm" type="button" data-act="syncjoin">Unirme</button></div>';
 }
 
