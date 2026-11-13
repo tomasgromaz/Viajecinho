@@ -96,6 +96,16 @@ label.f{display:block;font-size:13px;font-weight:600;margin:12px 0 4px}
 input[type=text],input[type=number],input[type=date],input[type=time],select,textarea{
   width:100%;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-height:42px}
 textarea{min-height:90px;resize:vertical}
+select{min-width:0;max-width:100%;height:42px}
+input[type=date],input[type=time]{-webkit-appearance:none;appearance:none;position:relative;display:block;min-width:0;max-width:100%;height:42px;line-height:1.2;text-align:left;padding-right:38px;
+  background:var(--surface) no-repeat right 12px center/18px}
+input[type=date]{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23839788' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='16' rx='3'/%3E%3Cpath d='M3 10h18M8 3v4M16 3v4'/%3E%3C/svg%3E")}
+input[type=time]{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23839788' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7v5l3 2'/%3E%3C/svg%3E")}
+input[type=date]::-webkit-date-and-time-value,input[type=time]::-webkit-date-and-time-value{text-align:left;min-width:0;margin:0}
+input[type=date]::-webkit-calendar-picker-indicator,input[type=time]::-webkit-calendar-picker-indicator{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:end}
+.pair>div{min-width:0}
+@media (max-width:359px){.pair{grid-template-columns:minmax(0,1fr)}}
 
 /* tarjetas */
 main{padding-top:16px;display:flex;flex-direction:column;gap:16px}
@@ -548,8 +558,8 @@ function expForm(id) {
     '<div style="width:130px"><label class="f" for="fc">Moneda</label><select id="fc">' + CURS.map(c => '<option value="' + c + '"' + (c === v.cur ? " selected" : "") + ">" + SYM[c] + " " + { BRL: "reales", ARS: "pesos", USD: "dólares" }[c] + "</option>").join("") + "</select></div></div>" +
     '<label class="f" for="fr">Pesos que te descontó la billetera (opcional)</label><input type="number" id="fr" inputmode="decimal" step="any" min="0" value="' + esc(v.ars || "") + '" placeholder="Ej: lo que te debitó Mercado Pago"><p class="small muted" style="margin:4px 0 0">Si pagaste con Pix o tarjeta, cargá cuántos pesos te debitaron. La app usa esa cotización real para este gasto.</p>' + '<label class="f" for="fp">Pagó</label><select id="fp">' + ms.map(m => '<option value="' + esc(m.id) + '"' + (m.id === v.payer ? " selected" : "") + ">" + esc(m.name) + "</option>").join("") + "</select>" +
     '<label class="f">Se reparte entre</label><div class="checks">' + ms.map(m => '<label><input type="checkbox" name="sp" value="' + esc(m.id) + '"' + ((v.split || []).includes(m.id) ? " checked" : "") + "> " + esc(m.name) + "</label>").join("") + "</div>" +
-    '<div class="row"><div class="grow"><label class="f" for="fdt">Fecha</label><input type="date" id="fdt" value="' + esc(v.date) + '"></div>' +
-    '<div class="grow"><label class="f" for="fk">Categoría</label><select id="fk">' + CATS.map(c => "<option" + (c === v.cat ? " selected" : "") + ">" + c + "</option>").join("") + "</select></div></div>" +
+    '<div class="pair"><div><label class="f" for="fdt">Fecha</label><input type="date" id="fdt" value="' + esc(v.date) + '"></div>' +
+    '<div><label class="f" for="fk">Categoría</label><select id="fk">' + CATS.map(c => "<option" + (c === v.cat ? " selected" : "") + ">" + c + "</option>").join("") + "</select></div></div>" +
     '<div class="acts">' + (e ? '<button class="btn danger" type="button" data-act="delexp" data-id="' + esc(e.id) + '" style="margin-right:auto">Eliminar</button>' : "") +
     '<button class="btn" type="button" data-act="close">Cancelar</button><button class="btn primary" type="submit">Guardar</button></div></form>',
     d2 => {
@@ -609,7 +619,7 @@ function itemForm(id, date) {
   const it = id ? S.items.find(x => x.id === id) : null;
   const v = it || { date: date || "", time: "", title: "", place: "", type: "Actividad" };
   openDlg('<h2>' + (it ? "Editar plan" : "Agregar plan") + '</h2><form id="f"><label class="f" for="it">Qué van a hacer</label><input type="text" id="it" value="' + esc(v.title) + '" placeholder="Ej: Cristo Redentor" autocomplete="off">' +
-    '<div class="row"><div class="grow"><label class="f" for="id">Día</label><input type="date" id="id" value="' + esc(v.date) + '"></div><div class="grow"><label class="f" for="ih">Hora</label><input type="time" id="ih" value="' + esc(v.time) + '"></div></div>' +
+    '<div class="pair"><div><label class="f" for="id">Día</label><input type="date" id="id" value="' + esc(v.date) + '"></div><div><label class="f" for="ih">Hora</label><input type="time" id="ih" value="' + esc(v.time) + '"></div></div>' +
     '<label class="f" for="ip">Lugar (para abrirlo en el mapa)</label><input type="text" id="ip" value="' + esc(v.place) + '" placeholder="Ej: Cristo Redentor, Río de Janeiro">' +
     '<label class="f" for="ik">Tipo</label><select id="ik">' + TYPES.map(t => "<option" + (t === v.type ? " selected" : "") + ">" + t + "</option>").join("") + "</select>" +
     '<div class="acts">' + (it ? '<button class="btn danger" type="button" data-act="delitem" data-id="' + esc(it.id) + '" style="margin-right:auto">Eliminar</button>' : "") +
@@ -805,7 +815,7 @@ function openSetup(fromExample) {
   const note = db ? "Los datos se comparten en vivo con quienes estén en el grupo." : "Los datos quedan en este celular. Para compartir, usá el resumen de gastos o el respaldo.";
   openDlg('<h2>' + (ready ? "Ajustes del viaje" : "Armá tu viaje") + '</h2><p class="small muted" style="margin:0">' + (fromExample ? "Esto es un ejemplo. Cargá tus datos para empezar. " : "") + note + '</p><form id="f">' +
     '<label class="f" for="sd">Destino</label><input type="text" id="sd" value="' + esc(m.dest) + '" placeholder="Ej: Florianópolis" autocomplete="off">' +
-    '<div class="row"><div class="grow"><label class="f" for="ss">Salida</label><input type="date" id="ss" value="' + esc(m.start) + '"></div><div class="grow"><label class="f" for="se">Vuelta</label><input type="date" id="se" value="' + esc(m.end) + '"></div></div>' +
+    '<div class="pair"><div><label class="f" for="ss">Salida</label><input type="date" id="ss" value="' + esc(m.start) + '"></div><div><label class="f" for="se">Vuelta</label><input type="date" id="se" value="' + esc(m.end) + '"></div></div>' +
     '<label class="f">Quiénes van</label><div id="mlist"></div><div class="mrow"><button class="btn sm" type="button" data-act="addmember">+ Agregar persona</button></div>' +
     '<label class="f" for="sb">Mostrar los saldos en</label><select id="sb">' + CURS.map(c => '<option value="' + c + '"' + (c === m.base ? " selected" : "") + ">" + SYM[c] + " " + { BRL: "reales", ARS: "pesos", USD: "dólares" }[c] + "</option>").join("") + "</select>" +
     '<label class="f">Cotización (cuántos pesos vale cada uno)</label><div class="row"><div class="grow"><label class="small muted" for="sr1">1 R$ =</label><input type="number" id="sr1" inputmode="decimal" step="any" min="0" value="' + esc(m.rates.BRL) + '"></div>' +
